@@ -1,0 +1,22 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Déjà configuré"
+    },
+    "error": {
+      "cannot_connect": "Problème de connexion",
+      "invalid_auth": "Problème d'authentification",
+      "unknown": "Erreur non reconnue"
+    },
+    "step": {
+      "user": {
+        "data": {
+          "name": "Nom",
+          "password": "Mot de passe",
+          "username": "Nom d'utilisateur"
+        }
+      }
+    }
+  },
+  "title": "IMA Protect Alarm"
+}

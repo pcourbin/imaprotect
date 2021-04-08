@@ -1,0 +1,10 @@
+{
+  "name": "IMA Protect Alarm",
+  "domain": "imaprotect",
+  "documentation": "https://github.com/pcourbin/imaprotect",
+  "codeowners": ["@pcourbin"],
+  "config_flow": true,
+  "requirements": ["pyimaprotect==1.0.1", "jsonpath_ng"],
+  "dependencies": [],
+  "version": "0.1.0"
+}
