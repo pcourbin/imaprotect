@@ -11,11 +11,13 @@ from homeassistant.const import (
     CONF_USERNAME,
 )
 from homeassistant.helpers.entity import Entity
+from homeassistant.util import Throttle
 
 from .const import (
     CONFIG,
     CONTROLLER,
     DOMAIN,
+    MIN_TIME_BETWEEN_UPDATES,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -48,13 +50,12 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
 
     entities = []
 
-    _LOGGER.debug("Add the status entity.")
+    _LOGGER.debug("Add the Alarm Status entity.")
     entities.append(
         IMAProtectAlarm(
             controller,
             controller_name,
-            "Alarm Status",
-            "mdi:alarm-light",
+            "Alarm Status"
         )
     )
 
@@ -65,12 +66,11 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
 class IMAProtectAlarm(Entity):
     """Representation of a Sensor."""
 
-    def __init__(self, controller, controller_name, name, icon):
+    def __init__(self, controller, controller_name, name):
         """Initialize the sensor."""
         self._controller = controller
         self._controller_name = controller_name
         self._name = controller_name+" -- "+name
-        self._icon = icon
         self._device_class = None
 
         self._state = None
@@ -103,7 +103,11 @@ class IMAProtectAlarm(Entity):
 
     @property
     def icon(self):
-        return self._icon
+        icon = 'mdi:home-lock'
+        if (self._state == 0):
+            icon = 'mdi:home-lock-open'
+        return icon
 
+    @Throttle(MIN_TIME_BETWEEN_UPDATES)
     def update(self):
-        self._state = self._controller.get_status()
+        self._state = self._controller.get_status() + 1

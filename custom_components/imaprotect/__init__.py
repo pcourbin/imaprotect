@@ -14,9 +14,16 @@ from homeassistant.const import (
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers import device_registry as dr
+
 from pyimaprotect import IMAProtect, STATUS_NUM_TO_TEXT
 
-from .const import CONFIG, CONTROLLER, DOMAIN, PLATFORMS, UNDO_UPDATE_LISTENER
+from .const import (
+    CONFIG, 
+    CONTROLLER, 
+    DOMAIN, 
+    PLATFORMS, 
+    UNDO_UPDATE_LISTENER
+)
 
 _LOGGER = logging.getLogger(__name__)
 

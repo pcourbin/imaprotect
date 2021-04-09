@@ -15,9 +15,9 @@ It will add a single sensor with the state of your alarm:
 
 | Alarm Value | State |
 |:----:|:----:|
-| `0` | `ON` |
+| `0` | `OFF` |
 | `1` | `PARTIAL` |
-| `2` | `OFF` |
+| `2` | `ON` |
 | `-1` | `UNKNOWN` |
 
 Alternatively, you need to add the following to your configuration.yaml file:
