@@ -110,4 +110,4 @@ class IMAProtectAlarm(Entity):
 
     @Throttle(MIN_TIME_BETWEEN_UPDATES)
     def update(self):
-        self._state = self._controller.get_status() + 1
+        self._state = self._controller.get_status()
