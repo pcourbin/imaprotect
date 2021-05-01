@@ -1,17 +1,13 @@
 """Config flow to configure the imaprotect integration."""
-import homeassistant.helpers.config_validation as cv
-import voluptuous as vol
-from homeassistant import config_entries
-from homeassistant.const import (
-    CONF_NAME,
-    CONF_PASSWORD,
-    CONF_USERNAME,
-)
 from pyimaprotect import IMAProtect
 
+import voluptuous as vol
+from homeassistant import config_entries
+from homeassistant.const import CONF_NAME
+from homeassistant.const import CONF_PASSWORD
+from homeassistant.const import CONF_USERNAME
+
 from .const import (
-    CONFIG,
-    CONTROLLER,
     DOMAIN,
 )
 
@@ -52,12 +48,14 @@ class IMAProtectConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 user_input.get(CONF_PASSWORD),
             )
 
-            testconnect = await self.hass.async_add_executor_job(controller.get_all_info)
-            if testconnect[0]['pk'] != 0:
+            testconnect = await self.hass.async_add_executor_job(
+                controller.get_all_info
+            )
+            if testconnect[0]["pk"] != 0:
                 return self.async_create_entry(
                     title=user_input.get(CONF_NAME), data=user_input
                 )
-        
+
             errors["base"] = "cannot_connect"
 
         return self.async_show_form(

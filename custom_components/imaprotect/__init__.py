@@ -1,31 +1,24 @@
 """IMA Protect Alarm integration"""
 import asyncio
 import logging
+from pyimaprotect import IMAProtect
 
-import homeassistant.helpers.config_validation as cv
-import voluptuous as vol
-from homeassistant.components.sensor import PLATFORM_SCHEMA
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import (
-    CONF_NAME,
-    CONF_PASSWORD,
-    CONF_USERNAME,
-)
+from homeassistant.const import CONF_NAME
+from homeassistant.const import CONF_PASSWORD
+from homeassistant.const import CONF_USERNAME
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers import device_registry as dr
 
-from pyimaprotect import IMAProtect, STATUS_NUM_TO_TEXT
-
-from .const import (
-    CONFIG, 
-    CONTROLLER, 
-    DOMAIN, 
-    PLATFORMS, 
-    UNDO_UPDATE_LISTENER
-)
+from .const import CONFIG
+from .const import CONTROLLER
+from .const import DOMAIN
+from .const import PLATFORMS
+from .const import UNDO_UPDATE_LISTENER
 
 _LOGGER = logging.getLogger(__name__)
+
 
 async def async_setup(hass: HomeAssistant, config: dict):
     """Set up the IMA Protect Alarm integration."""
@@ -44,11 +37,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
 
     testconnect = await hass.async_add_executor_job(controller.get_all_info)
     try:
-        testconnect[0]['pk']
+        testconnect[0]["pk"]
     except:
-        _LOGGER.error("IMA Protect Alarm API didn't answer to the request, unable to set up")
+        _LOGGER.error(
+            "IMA Protect Alarm API didn't answer to the request, unable to set up"
+        )
         raise ConfigEntryNotReady
-    """   
+    """
     if (bool(testconnect) and 'pk' not in testconnect[0]):
         _LOGGER.error("IMA Protect Alarm API didn't answer to the request, unable to set up")
         raise ConfigEntryNotReady

@@ -11,7 +11,7 @@
     "ryanluker.vscode-coverage-gutters",
     "ms-python.vscode-pylance"
   ],
-  
+
   "settings": {
     "files.eol": "\n",
     "editor.tabSize": 4,
@@ -27,4 +27,3 @@
     "files.trimTrailingWhitespace": true
   }
 }
-

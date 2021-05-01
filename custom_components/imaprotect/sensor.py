@@ -1,24 +1,18 @@
 """Support for the IMA Protect Alarm."""
 import logging
 
-import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
 from homeassistant.components.sensor import PLATFORM_SCHEMA
 from homeassistant.config_entries import SOURCE_IMPORT
-from homeassistant.const import (
-    CONF_NAME,
-    CONF_PASSWORD,
-    CONF_USERNAME,
-)
+from homeassistant.const import CONF_NAME
+from homeassistant.const import CONF_PASSWORD
+from homeassistant.const import CONF_USERNAME
 from homeassistant.helpers.entity import Entity
 from homeassistant.util import Throttle
 
-from .const import (
-    CONFIG,
-    CONTROLLER,
-    DOMAIN,
-    MIN_TIME_BETWEEN_UPDATES,
-)
+from .const import CONTROLLER
+from .const import DOMAIN
+from .const import MIN_TIME_BETWEEN_UPDATES
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -46,18 +40,12 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
     data = hass.data[DOMAIN][config_entry.entry_id]
     controller = data[CONTROLLER]
     controller_name = data[CONF_NAME]
-    #config = data[CONFIG]
+    # config = data[CONFIG]
 
     entities = []
 
     _LOGGER.debug("Add the Alarm Status entity.")
-    entities.append(
-        IMAProtectAlarm(
-            controller,
-            controller_name,
-            "Alarm Status"
-        )
-    )
+    entities.append(IMAProtectAlarm(controller, controller_name, "Alarm Status"))
 
     if entities:
         async_add_entities(entities, True)
@@ -70,7 +58,7 @@ class IMAProtectAlarm(Entity):
         """Initialize the sensor."""
         self._controller = controller
         self._controller_name = controller_name
-        self._name = controller_name+" -- "+name
+        self._name = controller_name + " -- " + name
         self._device_class = None
 
         self._state = None
@@ -103,9 +91,9 @@ class IMAProtectAlarm(Entity):
 
     @property
     def icon(self):
-        icon = 'mdi:home-lock'
-        if (self._state == 0):
-            icon = 'mdi:home-lock-open'
+        icon = "mdi:home-lock"
+        if self._state == 0:
+            icon = "mdi:home-lock-open"
         return icon
 
     @Throttle(MIN_TIME_BETWEEN_UPDATES)
