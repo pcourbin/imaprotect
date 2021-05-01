@@ -1,12 +1,12 @@
-[![License][license-shield]][license]
+[![License][license-shield]](LICENSE)
 [![hacs][hacsbadge]][hacs]
+[![Community Forum][forum-shield]][forum]
 
 [![pre-commit][pre-commit-shield]][pre-commit]
 [![Black][black-shield]][black]
 
 [![Project Maintenance][maintenance-shield]][user_profile]
 [![BuyMeCoffee][buymecoffeebadge]][buymecoffee]
-[![Community Forum][forum-shield]][forum]
 
 # [IMA Protect Alarm](https://www.imaprotect.com/) component for [Home Assistant](https://www.home-assistant.io/)
 
@@ -53,3 +53,4 @@ sensor:
 [maintenance-shield]: https://img.shields.io/badge/maintainer-%40pcourbin-blue.svg?style=for-the-badge
 [buymecoffee]: https://www.buymeacoffee.com/pcourbin
 [buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg?style=for-the-badge
+[user_profile]: https://github.com/pcourbin
