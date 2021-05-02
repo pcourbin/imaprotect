@@ -1,5 +1,4 @@
 [![License][license-shield]](LICENSE)
-[![hacs][hacsbadge]][hacs]
 [![Community Forum][forum-shield]][forum]
 
 [![pre-commit][pre-commit-shield]][pre-commit]
