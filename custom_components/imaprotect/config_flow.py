@@ -49,9 +49,9 @@ class IMAProtectConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             )
 
             testconnect = await self.hass.async_add_executor_job(
-                controller.get_all_info
+                controller.get_status
             )
-            if testconnect[0]["pk"] != 0:
+            if testconnect >= -1:
                 return self.async_create_entry(
                     title=user_input.get(CONF_NAME), data=user_input
                 )
