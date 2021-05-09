@@ -35,9 +35,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
         config.get(CONF_PASSWORD),
     )
 
-    testconnect = await hass.async_add_executor_job(controller.get_all_info)
+    testconnect = await hass.async_add_executor_job(controller.get_status)
     try:
-        testconnect[0]["pk"]
+        testconnect >= -1
     except:
         _LOGGER.error(
             "IMA Protect Alarm API didn't answer to the request, unable to set up"
