@@ -1,9 +1,8 @@
 [![License][license-shield]](LICENSE)
+[![hacs][hacsbadge]][hacs]
 [![Community Forum][forum-shield]][forum]
-
 [![pre-commit][pre-commit-shield]][pre-commit]
 [![Black][black-shield]][black]
-
 [![Project Maintenance][maintenance-shield]][user_profile]
 [![BuyMeCoffee][buymecoffeebadge]][buymecoffee]
 
@@ -14,6 +13,14 @@ The `imaprotect` integration allows you to get information from your [IMA Protec
 It uses python package [pyimaprotect](https://github.com/pcourbin/pyimaprotect) to call the IMA Protect API, based on the work of [lplancke](https://github.com/lplancke/jeedom_alarme_IMA) for [Jeedom](https://www.jeedom.com).
 
 ## Installation
+
+### [HACS][hacs]
+
+1. Search "IMA Protect Alarm" in `integrations` of [HACS][hacs] store.
+2. Click install.
+3. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for "IMA Protect Alarm".
+
+### From source
 
 Copy the `custom_components/imaprotect` folder into the config folder.
 
@@ -40,16 +47,16 @@ sensor:
     password: "mypassword"
 ```
 
-[license-shield]: https://img.shields.io/github/license/pcourbin/imaprotect.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/pcourbin/imaprotect.svg
 [hacs]: https://hacs.xyz
-[hacsbadge]: https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge
-[forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg?style=for-the-badge
+[hacsbadge]: https://img.shields.io/badge/HACS-Default-orange.svg
+[forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg
 [forum]: https://community.home-assistant.io/
 [pre-commit]: https://github.com/pre-commit/pre-commit
-[pre-commit-shield]: https://img.shields.io/badge/pre--commit-enabled-brightgreen?style=for-the-badge
+[pre-commit-shield]: https://img.shields.io/badge/pre--commit-enabled-brightgreen
 [black]: https://github.com/psf/black
-[black-shield]: https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge
-[maintenance-shield]: https://img.shields.io/badge/maintainer-%40pcourbin-blue.svg?style=for-the-badge
+[black-shield]: https://img.shields.io/badge/code%20style-black-000000.svg
+[maintenance-shield]: https://img.shields.io/badge/maintainer-%40pcourbin-blue.svg
 [buymecoffee]: https://www.buymeacoffee.com/pcourbin
-[buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg?style=for-the-badge
+[buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg
 [user_profile]: https://github.com/pcourbin

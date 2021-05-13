@@ -3,13 +3,9 @@
   "domain": "imaprotect",
   "documentation": "https://github.com/pcourbin/imaprotect",
   "issue_tracker": "https://github.com/pcourbin/imaprotect/issues",
-  "codeowners": [
-    "@pcourbin"
-  ],
+  "codeowners": ["@pcourbin"],
   "config_flow": true,
-  "requirements": [
-    "pyimaprotect==2.0.0"
-  ],
+  "requirements": ["pyimaprotect==2.0.0"],
   "dependencies": [],
   "version": "0.3.0",
   "iot_class": "cloud_polling"
