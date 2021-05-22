@@ -1,22 +1,41 @@
 {
-  "config": {
-    "abort": {
-      "already_configured": "Device is already configured"
-    },
-    "error": {
-      "cannot_connect": "Failed to connect",
-      "invalid_auth": "Invalid authentication",
-      "unknown": "Unexpected error"
-    },
-    "step": {
-      "user": {
-        "data": {
-          "name": "Name",
-          "password": "Password",
-          "username": "Username"
+    "config": {
+        "abort": {
+            "already_configured": "Account is already configured",
+            "reauth_successful": "Re-authentication was successful"
+        },
+        "error": {
+            "invalid_auth": "Invalid authentication",
+            "unknown": "Unexpected error"
+        },
+        "step": {
+            "reauth_confirm": {
+                "data": {
+                    "description": "Re-authenticate with your IMA Protect Alarm account.",
+                    "email": "Email",
+                    "password": "Password"
+                }
+            },
+            "user": {
+                "data": {
+                    "description": "Sign-in with your IMA Protect Alarm account.",
+                    "name": "Name of your alarm",
+                    "email": "Email",
+                    "password": "Password"
+                }
+            }
         }
-      }
+    },
+    "options": {
+        "error": {
+            "code_format_mismatch": "The default PIN code does not match the required number of digits"
+        },
+        "step": {
+            "init": {
+                "data": {
+                    "alarm_code": "PIN code for the alarm. If empty, no code is needed to control the alarm"
+                }
+            }
+        }
     }
-  },
-  "title": "IMA Protect Alarm"
 }

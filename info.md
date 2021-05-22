@@ -9,7 +9,8 @@
 # [IMA Protect Alarm](https://www.imaprotect.com/) component for [Home Assistant](https://www.home-assistant.io/)
 
 This is a _custom component_ for [Home Assistant](https://www.home-assistant.io/).
-The `imaprotect` integration allows you to get information from your [IMA Protect Alarm](https://www.imaprotect.com/).
+The `imaprotect` integration allows you to get and set the status of your [IMA Protect Alarm](https://www.imaprotect.com/).
+This work is inspired by the work on [Verisure Alarm](https://github.com/home-assistant/core/tree/dev/homeassistant/components/verisure) by [@frenck](https://github.com/frenck).
 
 {% if not installed %}
 
@@ -24,25 +25,23 @@ The `imaprotect` integration allows you to get information from your [IMA Protec
 
 ### Quick start
 
-To add imaprotect to your installation, go to Configuration >> Integrations in the UI, click the button with + sign and from the list of integrations select `IMA Protect Alarm`.
-It will add a alarm_control_panel with the state of your alarm:
+To add imaprotect to your installation:
 
-| Alarm Value |   IMA State   |
-| :---------: | :-------: |
-|     `disarmed`     |   `OFF`   |
-|     `armed_home`     | `PARTIAL` |
-|     `armed_away`     |   `ON`    |
+- go to Configuration >> Integrations in the UI,
+- click the button with + sign and from the list of integrations
+- select `IMA Protect Alarm`.
 
-Alternatively, you need to add the following to your configuration.yaml file:
+It will add a _alarm_control_panel_ with the state of your alarm:
 
-```yaml
-# Example configuration.yaml entry
-sensor:
-  - platform: imaprotect
-    name: "My IMA Protect"
-    username: "myusername"
-    password: "mypassword"
-```
+| Alarm Value  | IMA State |
+| :----------: | :-------: |
+|  `disarmed`  |   `OFF`   |
+| `armed_home` | `PARTIAL` |
+| `armed_away` |   `ON`    |
+
+#### Define a code
+
+Then, you can define a code (number or digit) in the configuration of the integration. By default, no code is needed.
 
 [license-shield]: https://img.shields.io/github/license/pcourbin/imaprotect.svg
 [hacs]: https://hacs.xyz

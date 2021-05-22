@@ -2,6 +2,17 @@
 History
 =======
 
+1.0.0 (2021-05-22)
+------------------
+
+* Full rewrite using a alarm_control_panel based on work for `Verisure Alarm`_ by `@frenck`_.
+* Able to get the status and change the status of the alarm using a alarm_control_panel
+* Option to define/change a code (number or digit) in configuration of the integration. By default, no code is needed.
+* Remove the configuration using YAML, only possible using the UI.
+
+.. _`Verisure Alarm`: https://github.com/home-assistant/core/tree/dev/homeassistant/components/verisure
+.. _`@frenck`: https://github.com/frenck
+
 0.4.0 (2021-05-13)
 ------------------
 

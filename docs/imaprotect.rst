@@ -4,6 +4,14 @@ imaprotect package
 Submodules
 ----------
 
+imaprotect.alarm\_control\_panel module
+---------------------------------------
+
+.. automodule:: imaprotect.alarm_control_panel
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 imaprotect.config\_flow module
 ------------------------------
 
@@ -20,10 +28,10 @@ imaprotect.const module
    :undoc-members:
    :show-inheritance:
 
-imaprotect.sensor module
-------------------------
+imaprotect.coordinator module
+-----------------------------
 
-.. automodule:: imaprotect.sensor
+.. automodule:: imaprotect.coordinator
    :members:
    :undoc-members:
    :show-inheritance:

@@ -31,20 +31,24 @@
         :target: `buymecoffee`_
         :alt: BuyMeCoffee
 
-This is a *custom component* for `Home Assistant`_.
-The *imaprotect* integration allows you to get information from your `IMA Protect Alarm`_.
-It uses python package `pyimaprotect`_ to call the IMA Protect API, based on the work of of `lplancke`_ and `chris94440`_ for `Jeedom`_.
-
+| This is a *custom component* for `Home Assistant`_.
+| The *imaprotect* integration allows you to get information from your `IMA Protect Alarm`_. This work is inspired by on the work on `Verisure Alarm`_ by `@frenck`_ for `Home Assistant`_.
+| It uses python package `pyimaprotect`_ to call the IMA Protect API, based on the work of of `lplancke`_ and `chris94440`_ for `Jeedom`_.
 
 `Documentation`_
 ----------------
 See https://pcourbin.github.io/imaprotect
 
-Full Example
-------------
+Configuration
+-------------
 
-To add imaprotect to your installation, go to Configuration >> Integrations in the UI, click the button with + sign and from the list of integrations select *IMA Protect Alarm*.
-It will add a single sensor with the state of your alarm:
+To add imaprotect to your installation:
+
+* go to Configuration >> Integrations in the UI,
+* click the button with + sign and from the list of integrations
+* select *IMA Protect Alarm*.
+
+It will add a *alarm_control_panel* with the state of your alarm:
 
 .. list-table:: List of Alarm status values
    :widths: auto
@@ -59,22 +63,12 @@ It will add a single sensor with the state of your alarm:
    * - `armed_away`
      - `ON`
 
-Alternatively, you need to add the following to your configuration.yaml file:
-
-.. code-block:: yaml
-
-  # Example configuration.yaml entry
-  sensor:
-    - platform: imaprotect
-      name: "My IMA Protect"
-      username: "myusername"
-      password: "mypassword"
-
+Then, **you can define a code** (number or digit) in the configuration of the integration. By default, no code is needed.
 
 
 Credits
 -------
-
+| This work is inspired by the work of `Verisure Alarm`_ by `@frenck`_ for `Home Assistant`_.
 | This repo structure was inspired by `oncleben31/cookiecutter-homeassistant-custom-component`_ project template created with Cookiecutter_.
 
 .. _`IMA Protect Alarm`: https://www.imaprotect.com/1483-domotique-ethernet-webserver-ipx800-v4-3760309690001.html
@@ -83,6 +77,8 @@ Credits
 .. _`lplancke`: https://github.com/lplancke/jeedom_alarme_IMA
 .. _`Jeedom`: https://www.jeedom.com
 .. _`chris94440`: https://github.com/chris94440
+.. _`Verisure Alarm`: https://github.com/home-assistant/core/tree/dev/homeassistant/components/verisure
+.. _`@frenck`: https://github.com/frenck
 
 .. _`Documentation`: https://pcourbin.github.io/imaprotect
 
