@@ -1,33 +1,33 @@
 """Support for IMA Protect alarm control panels."""
 from __future__ import annotations
 
-import asyncio
 import re
+from collections.abc import Iterable
+from typing import Callable
 
-from homeassistant.components.alarm_control_panel import (
-    FORMAT_NUMBER,
-    FORMAT_TEXT,
-    AlarmControlPanelEntity,
-)
-from homeassistant.components.alarm_control_panel.const import (
-    SUPPORT_ALARM_ARM_AWAY,
-    SUPPORT_ALARM_ARM_HOME,
-)
-from homeassistant.const import CONF_NAME, ATTR_CODE
+from homeassistant.components.alarm_control_panel import AlarmControlPanelEntity
+from homeassistant.components.alarm_control_panel import FORMAT_NUMBER
+from homeassistant.components.alarm_control_panel import FORMAT_TEXT
+from homeassistant.components.alarm_control_panel.const import SUPPORT_ALARM_ARM_AWAY
+from homeassistant.components.alarm_control_panel.const import SUPPORT_ALARM_ARM_HOME
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import HomeAssistant, callback
-from homeassistant.helpers.entity import DeviceInfo
-from homeassistant.helpers.entity_platform import AddEntitiesCallback
+from homeassistant.const import CONF_NAME
+from homeassistant.core import callback
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import ALARM_STATE_TO_HA, DOMAIN, LOGGER, CONF_ALARM_CODE, LOGGER
+from .const import ALARM_STATE_TO_HA
+from .const import CONF_ALARM_CODE
+from .const import DOMAIN
+from .const import LOGGER
 from .coordinator import IMAProtectDataUpdateCoordinator
 
 
 async def async_setup_entry(
     hass: HomeAssistant,
     entry: ConfigEntry,
-    async_add_entities: AddEntitiesCallback,
+    async_add_entities: Callable[[Iterable[Entity]], None],
 ) -> None:
     """Set up IMA Protect alarm control panel from a config entry."""
     async_add_entities([IMAProtectAlarm(coordinator=hass.data[DOMAIN][entry.entry_id])])
@@ -41,9 +41,7 @@ class IMAProtectAlarm(CoordinatorEntity, AlarmControlPanelEntity):
     _changed_by: str | None = None
     _state: str | None = None
 
-    def __init__(
-        self, coordinator: IMAProtectDataUpdateCoordinator
-    ) -> None:
+    def __init__(self, coordinator: IMAProtectDataUpdateCoordinator) -> None:
         """Initialize the IMA Protect Alarm Control Panel."""
         super().__init__(coordinator)
         self._changed_by = None
@@ -64,7 +62,7 @@ class IMAProtectAlarm(CoordinatorEntity, AlarmControlPanelEntity):
         return self.coordinator.entry.data[CONF_NAME]
 
     @property
-    def device_info(self) -> DeviceInfo:
+    def device_info(self):
         """Return device information about this entity."""
         return {
             "name": "IMA Protect Alarm",
@@ -110,7 +108,7 @@ class IMAProtectAlarm(CoordinatorEntity, AlarmControlPanelEntity):
             LOGGER.warning("Invalid code given")
         return check
 
-    async def _async_set_arm_state(self, state: int, code = None) -> None:
+    async def _async_set_arm_state(self, state: int, code=None) -> None:
         """Send set arm state command."""
         if not self._validate_code(code):
             return
@@ -121,25 +119,25 @@ class IMAProtectAlarm(CoordinatorEntity, AlarmControlPanelEntity):
         LOGGER.debug("IMA Protect set arm state %s", state)
         await self.coordinator.async_refresh()
 
-    async def async_alarm_disarm(self, code = None) -> None:
+    async def async_alarm_disarm(self, code=None) -> None:
         """Send disarm command."""
         await self._async_set_arm_state(0, code)
 
-    async def async_alarm_arm_home(self, code = None) -> None:
+    async def async_alarm_arm_home(self, code=None) -> None:
         """Send arm home command."""
         await self._async_set_arm_state(1, code)
 
-    async def async_alarm_arm_away(self, code = None) -> None:
+    async def async_alarm_arm_away(self, code=None) -> None:
         """Send arm away command."""
         await self._async_set_arm_state(2, code)
 
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        self._state = ALARM_STATE_TO_HA.get(
-            self.coordinator.data["alarm"]
+        self._state = ALARM_STATE_TO_HA.get(self.coordinator.data["alarm"])
+        self._changed_by = (
+            "Not Implemented"  # TODO: self.coordinator.data["alarm"].get("name")
         )
-        self._changed_by = "Not Implemented" # TODO: self.coordinator.data["alarm"].get("name")
         super()._handle_coordinator_update()
 
     async def async_added_to_hass(self) -> None:

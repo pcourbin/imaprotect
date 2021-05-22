@@ -2,17 +2,21 @@
 from __future__ import annotations
 
 from datetime import timedelta
-
-from pyimaprotect import IMAProtect, IMAProtectConnectError
+from pyimaprotect import IMAProtect
+from pyimaprotect import IMAProtectConnectError
 
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import CONF_EMAIL, CONF_PASSWORD, HTTP_SERVICE_UNAVAILABLE
-from homeassistant.core import Event, HomeAssistant
-from homeassistant.helpers.storage import STORAGE_DIR
+from homeassistant.const import CONF_EMAIL
+from homeassistant.const import CONF_PASSWORD
+from homeassistant.const import HTTP_SERVICE_UNAVAILABLE
+from homeassistant.core import Event
+from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from homeassistant.util import Throttle
 
-from .const import DEFAULT_SCAN_INTERVAL, DOMAIN, LOGGER
+from .const import DEFAULT_SCAN_INTERVAL
+from .const import DOMAIN
+from .const import LOGGER
 
 
 class IMAProtectDataUpdateCoordinator(DataUpdateCoordinator):
@@ -24,8 +28,7 @@ class IMAProtectDataUpdateCoordinator(DataUpdateCoordinator):
         self.entry = entry
 
         self.imaprotect = IMAProtect(
-            username=entry.data[CONF_EMAIL],
-            password=entry.data[CONF_PASSWORD]
+            username=entry.data[CONF_EMAIL], password=entry.data[CONF_PASSWORD]
         )
 
         super().__init__(
@@ -78,4 +81,3 @@ class IMAProtectDataUpdateCoordinator(DataUpdateCoordinator):
     def update_smartcam_imageseries(self) -> None:
         """Update the image series."""
         self.imageseries = self.imaprotect.get_images_list()
-
