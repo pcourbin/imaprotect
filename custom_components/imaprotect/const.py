@@ -1,10 +1,21 @@
-"""Constants for the EcoDevices component."""
+"""Constants for the IMA Protect integration."""
+import logging
 from datetime import timedelta
+
+from homeassistant.const import STATE_ALARM_ARMED_AWAY
+from homeassistant.const import STATE_ALARM_ARMED_HOME
+from homeassistant.const import STATE_ALARM_DISARMED
 
 DOMAIN = "imaprotect"
 
-CONTROLLER = "controller"
-CONFIG = "config"
-PLATFORMS = ["sensor"]
-UNDO_UPDATE_LISTENER = "undo_update_listener"
-MIN_TIME_BETWEEN_UPDATES = timedelta(minutes=5)
+LOGGER = logging.getLogger(__package__)
+
+CONF_ALARM_CODE = "alarm_code"
+
+DEFAULT_SCAN_INTERVAL = timedelta(minutes=1)
+
+ALARM_STATE_TO_HA = {
+    0: STATE_ALARM_DISARMED,
+    1: STATE_ALARM_ARMED_HOME,
+    2: STATE_ALARM_ARMED_AWAY,
+}

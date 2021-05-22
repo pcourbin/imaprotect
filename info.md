@@ -9,43 +9,39 @@
 # [IMA Protect Alarm](https://www.imaprotect.com/) component for [Home Assistant](https://www.home-assistant.io/)
 
 This is a _custom component_ for [Home Assistant](https://www.home-assistant.io/).
-The `imaprotect` integration allows you to get information from your [IMA Protect Alarm](https://www.imaprotect.com/).
-It uses python package [pyimaprotect](https://github.com/pcourbin/pyimaprotect) to call the IMA Protect API, based on the work of [lplancke](https://github.com/lplancke/jeedom_alarme_IMA) for [Jeedom](https://www.jeedom.com).
+The `imaprotect` integration allows you to get and set the status of your [IMA Protect Alarm](https://www.imaprotect.com/).
+This work is inspired by the work on [Verisure Alarm](https://github.com/home-assistant/core/tree/dev/homeassistant/components/verisure) by [@frenck](https://github.com/frenck).
 
-## Installation
+{% if not installed %}
 
-### [HACS][hacs]
+### Installation
 
-1. Search "IMA Protect Alarm" in `integrations` of [HACS][hacs] store.
-2. Click install.
-3. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for "IMA Protect Alarm".
+1. Click install.
+2. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for "IMA Protect Alarm".
 
-### From source
+{% endif %}
 
-Copy the `custom_components/imaprotect` folder into the config folder.
+### [Docs (installation, config, and issues)](https://pcourbin.github.io/imaprotect)
 
-## Configuration
+### Quick start
 
-To add imaprotect to your installation, go to Configuration >> Integrations in the UI, click the button with + sign and from the list of integrations select `IMA Protect Alarm`.
-It will add a single sensor with the state of your alarm:
+To add imaprotect to your installation:
 
-| Alarm Value |   State   |
-| :---------: | :-------: |
-|     `0`     |   `OFF`   |
-|     `1`     | `PARTIAL` |
-|     `2`     |   `ON`    |
-|    `-1`     | `UNKNOWN` |
+- go to Configuration >> Integrations in the UI,
+- click the button with + sign and from the list of integrations
+- select `IMA Protect Alarm`.
 
-Alternatively, you need to add the following to your configuration.yaml file:
+It will add a _alarm_control_panel_ with the state of your alarm:
 
-```yaml
-# Example configuration.yaml entry
-sensor:
-  - platform: imaprotect
-    name: "My IMA Protect"
-    username: "myusername"
-    password: "mypassword"
-```
+| Alarm Value  | IMA State |
+| :----------: | :-------: |
+|  `disarmed`  |   `OFF`   |
+| `armed_home` | `PARTIAL` |
+| `armed_away` |   `ON`    |
+
+#### Define a code
+
+Then, you can define a code (number or digit) in the configuration of the integration. By default, no code is needed.
 
 [license-shield]: https://img.shields.io/github/license/pcourbin/imaprotect.svg
 [hacs]: https://hacs.xyz

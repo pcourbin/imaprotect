@@ -1,6 +1,5 @@
 {
   "name": "IMA Protect Alarm",
-  "render_readme": true,
-  "domains": ["sensor"],
+  "domains": ["alarm_control_panel"],
   "iot_class": "Cloud Polling"
 }

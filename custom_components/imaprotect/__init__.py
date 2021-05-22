@@ -1,107 +1,56 @@
-"""IMA Protect Alarm integration"""
-import asyncio
-import logging
-from pyimaprotect import IMAProtect
+"""Support for IMA Protect devices."""
+from __future__ import annotations
 
+import homeassistant.helpers.config_validation as cv
+from homeassistant.components.alarm_control_panel import (
+    DOMAIN as ALARM_CONTROL_PANEL_DOMAIN,
+)
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import CONF_NAME
-from homeassistant.const import CONF_PASSWORD
-from homeassistant.const import CONF_USERNAME
+from homeassistant.const import EVENT_HOMEASSISTANT_STOP
 from homeassistant.core import HomeAssistant
-from homeassistant.exceptions import ConfigEntryNotReady
-from homeassistant.helpers import device_registry as dr
+from homeassistant.exceptions import ConfigEntryAuthFailed
 
-from .const import CONFIG
-from .const import CONTROLLER
 from .const import DOMAIN
-from .const import PLATFORMS
-from .const import UNDO_UPDATE_LISTENER
+from .coordinator import IMAProtectDataUpdateCoordinator
 
-_LOGGER = logging.getLogger(__name__)
+PLATFORMS = [
+    ALARM_CONTROL_PANEL_DOMAIN,
+]
+
+CONFIG_SCHEMA = cv.deprecated(DOMAIN)
 
 
-async def async_setup(hass: HomeAssistant, config: dict):
-    """Set up the IMA Protect Alarm integration."""
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Set up IMA Protect from a config entry."""
+    coordinator = IMAProtectDataUpdateCoordinator(hass, entry=entry)
+
+    if not await coordinator.async_login():
+        raise ConfigEntryAuthFailed
+
+    entry.async_on_unload(
+        hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, coordinator.async_logout)
+    )
+
+    await coordinator.async_config_entry_first_refresh()
+
     hass.data.setdefault(DOMAIN, {})
-    return True
+    hass.data[DOMAIN][entry.entry_id] = coordinator
 
-
-async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
-    """Set up IMA Protect Alarm from a config entry."""
-    config = entry.data
-
-    controller = IMAProtect(
-        config.get(CONF_USERNAME),
-        config.get(CONF_PASSWORD),
-    )
-
-    testconnect = await hass.async_add_executor_job(controller.get_status)
-    try:
-        testconnect >= -1
-    except:
-        _LOGGER.error(
-            "IMA Protect Alarm API didn't answer to the request, unable to set up"
-        )
-        raise ConfigEntryNotReady
-    """
-    if (bool(testconnect) and 'pk' not in testconnect[0]):
-        _LOGGER.error("IMA Protect Alarm API didn't answer to the request, unable to set up")
-        raise ConfigEntryNotReady
-    """
-
-    _LOGGER.info("Successfully connected to the IMA Protect Alarm API.")
-
-    if config.get(CONF_USERNAME) and config.get(CONF_PASSWORD):
-        _LOGGER.debug(
-            "Authenticated as %s.",
-            config.get(CONF_USERNAME),
-        )
-
-    undo_listener = entry.add_update_listener(_async_update_listener)
-
-    hass.data[DOMAIN][entry.entry_id] = {
-        CONF_NAME: config.get(CONF_NAME),
-        CONTROLLER: controller,
-        CONFIG: config,
-        UNDO_UPDATE_LISTENER: undo_listener,
-    }
-
-    device_registry = await dr.async_get_registry(hass)
-    device_registry.async_get_or_create(
-        config_entry_id=entry.entry_id,
-        identifiers={(DOMAIN, controller.username)},
-        manufacturer="IMA",
-        model="Protect",
-        name=config.get(CONF_NAME),
-    )
-
-    for component in PLATFORMS:
-        hass.async_create_task(
-            hass.config_entries.async_forward_entry_setup(entry, component)
-        )
+    # Set up all platforms for this device/entry.
+    hass.config_entries.async_setup_platforms(entry, PLATFORMS)
 
     return True
 
 
-async def _async_update_listener(hass: HomeAssistant, entry: ConfigEntry):
-    """Handle options update."""
-    await hass.config_entries.async_reload(entry.entry_id)
+async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Unload IMA Protect config entry."""
+    unload_ok = await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
+    if not unload_ok:
+        return False
 
+    del hass.data[DOMAIN][entry.entry_id]
 
-async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry):
-    """Unload a config entry."""
-    unload_ok = all(
-        await asyncio.gather(
-            *[
-                hass.config_entries.async_forward_entry_unload(entry, component)
-                for component in PLATFORMS
-            ]
-        )
-    )
+    if not hass.data[DOMAIN]:
+        del hass.data[DOMAIN]
 
-    hass.data[DOMAIN][entry.entry_id][UNDO_UPDATE_LISTENER]()
-
-    if unload_ok:
-        hass.data[DOMAIN].pop(entry.entry_id)
-
-    return unload_ok
+    return True
