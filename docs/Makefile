@@ -4,7 +4,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = python -msphinx
-SPHINXPROJ    = ecodevices_rt2
+SPHINXPROJ    = imaprotect
 SOURCEDIR     = .
 BUILDDIR      = _build
 

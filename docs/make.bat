@@ -9,7 +9,7 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=.
 set BUILDDIR=_build
-set SPHINXPROJ=ecodevices_rt2
+set SPHINXPROJ=imaprotect
 
 if "%1" == "" goto help
 

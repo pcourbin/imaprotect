@@ -1,4 +1,4 @@
-Welcome to ecodevices_rt2's documentation!
+Welcome to imaprotect's documentation!
 ============================================
 
 .. toctree::
