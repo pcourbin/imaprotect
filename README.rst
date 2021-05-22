@@ -31,8 +31,11 @@
         :target: `buymecoffee`_
         :alt: BuyMeCoffee
 
-| This is a *custom component* for `Home Assistant`_.
-| The *imaprotect* integration allows you to get information from your `IMA Protect Alarm`_. This work is inspired by on the work on `Verisure Alarm`_ by `@frenck`_ for `Home Assistant`_.
+
+| This is a *custom component* for `Home Assistant`_.
+| The *imaprotect* integration allows you to get information from your `IMA Protect Alarm`_. 
+
+| This work is inspired by on the work on `Verisure Alarm`_ by `@frenck`_ for `Home Assistant`_.
 | It uses python package `pyimaprotect`_ to call the IMA Protect API, based on the work of of `lplancke`_ and `chris94440`_ for `Jeedom`_.
 
 `Documentation`_
