@@ -99,7 +99,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">imaprotect</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">imaprotect package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#imaprotect-alarm-control-panel-module">imaprotect.alarm_control_panel module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-imaprotect.alarm_control_panel">imaprotect.alarm_control_panel module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-imaprotect.config_flow">imaprotect.config_flow module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-imaprotect.const">imaprotect.const module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-imaprotect.coordinator">imaprotect.coordinator module</a></li>
@@ -185,8 +185,98 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="imaprotect-alarm-control-panel-module">
-<h2>imaprotect.alarm_control_panel module<a class="headerlink" href="#imaprotect-alarm-control-panel-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-imaprotect.alarm_control_panel">
+<span id="imaprotect-alarm-control-panel-module"></span><h2>imaprotect.alarm_control_panel module<a class="headerlink" href="#module-imaprotect.alarm_control_panel" title="Permalink to this headline">¶</a></h2>
+<p>Support for IMA Protect alarm control panels.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="imaprotect.alarm_control_panel.IMAProtectAlarm">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">imaprotect.alarm_control_panel.</span></span><span class="sig-name descname"><span class="pre">IMAProtectAlarm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coordinator</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#imaprotect.coordinator.IMAProtectDataUpdateCoordinator" title="imaprotect.coordinator.IMAProtectDataUpdateCoordinator"><span class="pre">imaprotect.coordinator.IMAProtectDataUpdateCoordinator</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/imaprotect/alarm_control_panel.html#IMAProtectAlarm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.alarm_control_panel.IMAProtectAlarm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">homeassistant.helpers.update_coordinator.CoordinatorEntity</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">homeassistant.components.alarm_control_panel.AlarmControlPanelEntity</span></code></p>
+<p>Representation of a IMAProtect alarm status.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="imaprotect.alarm_control_panel.IMAProtectAlarm.async_added_to_hass">
+<em class="property"><span class="pre">async</span> </em><span class="sig-name descname"><span class="pre">async_added_to_hass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/imaprotect/alarm_control_panel.html#IMAProtectAlarm.async_added_to_hass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.alarm_control_panel.IMAProtectAlarm.async_added_to_hass" title="Permalink to this definition">¶</a></dt>
+<dd><p>When entity is added to hass.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="imaprotect.alarm_control_panel.IMAProtectAlarm.async_alarm_arm_away">
+<em class="property"><span class="pre">async</span> </em><span class="sig-name descname"><span class="pre">async_alarm_arm_away</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/imaprotect/alarm_control_panel.html#IMAProtectAlarm.async_alarm_arm_away"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.alarm_control_panel.IMAProtectAlarm.async_alarm_arm_away" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send arm away command.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="imaprotect.alarm_control_panel.IMAProtectAlarm.async_alarm_arm_home">
+<em class="property"><span class="pre">async</span> </em><span class="sig-name descname"><span class="pre">async_alarm_arm_home</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/imaprotect/alarm_control_panel.html#IMAProtectAlarm.async_alarm_arm_home"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.alarm_control_panel.IMAProtectAlarm.async_alarm_arm_home" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send arm home command.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="imaprotect.alarm_control_panel.IMAProtectAlarm.async_alarm_disarm">
+<em class="property"><span class="pre">async</span> </em><span class="sig-name descname"><span class="pre">async_alarm_disarm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/imaprotect/alarm_control_panel.html#IMAProtectAlarm.async_alarm_disarm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.alarm_control_panel.IMAProtectAlarm.async_alarm_disarm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send disarm command.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="imaprotect.alarm_control_panel.IMAProtectAlarm.changed_by">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">changed_by</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span></em><a class="headerlink" href="#imaprotect.alarm_control_panel.IMAProtectAlarm.changed_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the last change triggered by.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="imaprotect.alarm_control_panel.IMAProtectAlarm.code">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">code</span></span><a class="headerlink" href="#imaprotect.alarm_control_panel.IMAProtectAlarm.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="imaprotect.alarm_control_panel.IMAProtectAlarm.code_format">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">code_format</span></span><a class="headerlink" href="#imaprotect.alarm_control_panel.IMAProtectAlarm.code_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Regex for code format or None if no code is required.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="imaprotect.alarm_control_panel.IMAProtectAlarm.coordinator">
+<span class="sig-name descname"><span class="pre">coordinator</span></span><em class="property"><span class="pre">:</span> <span class="pre">IMAProtectDataUpdateCoordinator</span></em><a class="headerlink" href="#imaprotect.alarm_control_panel.IMAProtectAlarm.coordinator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="imaprotect.alarm_control_panel.IMAProtectAlarm.device_info">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">device_info</span></span><a class="headerlink" href="#imaprotect.alarm_control_panel.IMAProtectAlarm.device_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return device information about this entity.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="imaprotect.alarm_control_panel.IMAProtectAlarm.name">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#imaprotect.alarm_control_panel.IMAProtectAlarm.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name of the entity.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="imaprotect.alarm_control_panel.IMAProtectAlarm.state">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">state</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span></em><a class="headerlink" href="#imaprotect.alarm_control_panel.IMAProtectAlarm.state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the state of the entity.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="imaprotect.alarm_control_panel.IMAProtectAlarm.supported_features">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">supported_features</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#imaprotect.alarm_control_panel.IMAProtectAlarm.supported_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of supported features.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="imaprotect.alarm_control_panel.IMAProtectAlarm.unique_id">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">unique_id</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#imaprotect.alarm_control_panel.IMAProtectAlarm.unique_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the unique ID for this entity.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="imaprotect.alarm_control_panel.async_setup_entry">
+<em class="property"><span class="pre">async</span> </em><span class="sig-prename descclassname"><span class="pre">imaprotect.alarm_control_panel.</span></span><span class="sig-name descname"><span class="pre">async_setup_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hass</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">HomeAssistant</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">ConfigEntry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">async_add_entities</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">Entity</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/imaprotect/alarm_control_panel.html#async_setup_entry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.alarm_control_panel.async_setup_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set up IMA Protect alarm control panel from a config entry.</p>
+</dd></dl>
+
 </div>
 <div class="section" id="module-imaprotect.config_flow">
 <span id="imaprotect-config-flow-module"></span><h2>imaprotect.config_flow module<a class="headerlink" href="#module-imaprotect.config_flow" title="Permalink to this headline">¶</a></h2>
