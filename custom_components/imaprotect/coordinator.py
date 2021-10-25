@@ -2,13 +2,13 @@
 from __future__ import annotations
 
 from datetime import timedelta
+from http import HTTPStatus
 from pyimaprotect import IMAProtect
 from pyimaprotect import IMAProtectConnectError
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_EMAIL
 from homeassistant.const import CONF_PASSWORD
-from homeassistant.const import HTTP_SERVICE_UNAVAILABLE
 from homeassistant.core import Event
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
@@ -65,7 +65,7 @@ class IMAProtectDataUpdateCoordinator(DataUpdateCoordinator):
             )
         except IMAProtectConnectError as ex:
             LOGGER.error("Could not read overview, %s", ex)
-            if ex.status_code == HTTP_SERVICE_UNAVAILABLE:  # Service unavailable
+            if ex.status_code == HTTPStatus.SERVICE_UNAVAILABLE:
                 LOGGER.info("Trying to log in again")
                 await self.async_login()
                 return {}
