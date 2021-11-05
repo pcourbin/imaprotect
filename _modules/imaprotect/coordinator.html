@@ -78,13 +78,13 @@
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">http</span> <span class="k">import</span> <span class="n">HTTPStatus</span>
 <span class="kn">from</span> <span class="nn">pyimaprotect</span> <span class="k">import</span> <span class="n">IMAProtect</span>
 <span class="kn">from</span> <span class="nn">pyimaprotect</span> <span class="k">import</span> <span class="n">IMAProtectConnectError</span>
 
 <span class="kn">from</span> <span class="nn">homeassistant.config_entries</span> <span class="k">import</span> <span class="n">ConfigEntry</span>
 <span class="kn">from</span> <span class="nn">homeassistant.const</span> <span class="k">import</span> <span class="n">CONF_EMAIL</span>
 <span class="kn">from</span> <span class="nn">homeassistant.const</span> <span class="k">import</span> <span class="n">CONF_PASSWORD</span>
-<span class="kn">from</span> <span class="nn">homeassistant.const</span> <span class="k">import</span> <span class="n">HTTP_SERVICE_UNAVAILABLE</span>
 <span class="kn">from</span> <span class="nn">homeassistant.core</span> <span class="k">import</span> <span class="n">Event</span>
 <span class="kn">from</span> <span class="nn">homeassistant.core</span> <span class="k">import</span> <span class="n">HomeAssistant</span>
 <span class="kn">from</span> <span class="nn">homeassistant.helpers.update_coordinator</span> <span class="k">import</span> <span class="n">DataUpdateCoordinator</span>
@@ -141,7 +141,7 @@
             <span class="p">)</span>
         <span class="k">except</span> <span class="n">IMAProtectConnectError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
             <span class="n">LOGGER</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Could not read overview, </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">ex</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">HTTP_SERVICE_UNAVAILABLE</span><span class="p">:</span>  <span class="c1"># Service unavailable</span>
+            <span class="k">if</span> <span class="n">ex</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">SERVICE_UNAVAILABLE</span><span class="p">:</span>
                 <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Trying to log in again&quot;</span><span class="p">)</span>
                 <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">async_login</span><span class="p">()</span>
                 <span class="k">return</span> <span class="p">{}</span>
