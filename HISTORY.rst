@@ -2,6 +2,11 @@
 History
 =======
 
+1.0.2 (2021-12-31)
+------------------
+
+* Update imports to remove references to `HTTP_CODES` from `homeassistant.const`
+  
 1.0.0 (2021-05-22)
 ------------------
 
