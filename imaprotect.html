@@ -15,6 +15,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -88,17 +89,17 @@
            <div itemprop="articleBody">
              
   <section id="imaprotect-package">
-<h1>imaprotect package<a class="headerlink" href="#imaprotect-package" title="Permalink to this headline"></a></h1>
+<h1>imaprotect package<a class="headerlink" href="#imaprotect-package" title="Permalink to this heading"></a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
 </section>
 <section id="module-imaprotect.alarm_control_panel">
-<span id="imaprotect-alarm-control-panel-module"></span><h2>imaprotect.alarm_control_panel module<a class="headerlink" href="#module-imaprotect.alarm_control_panel" title="Permalink to this headline"></a></h2>
+<span id="imaprotect-alarm-control-panel-module"></span><h2>imaprotect.alarm_control_panel module<a class="headerlink" href="#module-imaprotect.alarm_control_panel" title="Permalink to this heading"></a></h2>
 <p>Support for IMA Protect alarm control panels.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="imaprotect.alarm_control_panel.IMAProtectAlarm">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">imaprotect.alarm_control_panel.</span></span><span class="sig-name descname"><span class="pre">IMAProtectAlarm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coordinator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#imaprotect.coordinator.IMAProtectDataUpdateCoordinator" title="imaprotect.coordinator.IMAProtectDataUpdateCoordinator"><span class="pre">imaprotect.coordinator.IMAProtectDataUpdateCoordinator</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/imaprotect/alarm_control_panel.html#IMAProtectAlarm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.alarm_control_panel.IMAProtectAlarm" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">homeassistant.helpers.update_coordinator.CoordinatorEntity</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">homeassistant.components.alarm_control_panel.AlarmControlPanelEntity</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">imaprotect.alarm_control_panel.</span></span><span class="sig-name descname"><span class="pre">IMAProtectAlarm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coordinator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#imaprotect.coordinator.IMAProtectDataUpdateCoordinator" title="imaprotect.coordinator.IMAProtectDataUpdateCoordinator"><span class="pre">IMAProtectDataUpdateCoordinator</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/imaprotect/alarm_control_panel.html#IMAProtectAlarm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.alarm_control_panel.IMAProtectAlarm" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">CoordinatorEntity</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">AlarmControlPanelEntity</span></code></p>
 <p>Representation of a IMAProtect alarm status.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="imaprotect.alarm_control_panel.IMAProtectAlarm.async_added_to_hass">
@@ -186,12 +187,12 @@
 
 </section>
 <section id="module-imaprotect.config_flow">
-<span id="imaprotect-config-flow-module"></span><h2>imaprotect.config_flow module<a class="headerlink" href="#module-imaprotect.config_flow" title="Permalink to this headline"></a></h2>
+<span id="imaprotect-config-flow-module"></span><h2>imaprotect.config_flow module<a class="headerlink" href="#module-imaprotect.config_flow" title="Permalink to this heading"></a></h2>
 <p>Config flow for IMA Protect Alarm integration.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="imaprotect.config_flow.IMAProtectConfigFlowHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">imaprotect.config_flow.</span></span><span class="sig-name descname"><span class="pre">IMAProtectConfigFlowHandler</span></span><a class="reference internal" href="_modules/imaprotect/config_flow.html#IMAProtectConfigFlowHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.config_flow.IMAProtectConfigFlowHandler" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">homeassistant.config_entries.ConfigFlow</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigFlow</span></code></p>
 <p>Handle a config flow for IMA Protect Alarm.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="imaprotect.config_flow.IMAProtectConfigFlowHandler.VERSION">
@@ -200,7 +201,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="imaprotect.config_flow.IMAProtectConfigFlowHandler.async_get_options_flow">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">async_get_options_flow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_entry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">homeassistant.config_entries.ConfigEntry</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#imaprotect.config_flow.IMAProtectOptionsFlowHandler" title="imaprotect.config_flow.IMAProtectOptionsFlowHandler"><span class="pre">imaprotect.config_flow.IMAProtectOptionsFlowHandler</span></a></span></span><a class="reference internal" href="_modules/imaprotect/config_flow.html#IMAProtectConfigFlowHandler.async_get_options_flow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.config_flow.IMAProtectConfigFlowHandler.async_get_options_flow" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">async_get_options_flow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_entry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ConfigEntry</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#imaprotect.config_flow.IMAProtectOptionsFlowHandler" title="imaprotect.config_flow.IMAProtectOptionsFlowHandler"><span class="pre">IMAProtectOptionsFlowHandler</span></a></span></span><a class="reference internal" href="_modules/imaprotect/config_flow.html#IMAProtectConfigFlowHandler.async_get_options_flow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.config_flow.IMAProtectConfigFlowHandler.async_get_options_flow" title="Permalink to this definition"></a></dt>
 <dd><p>Get the options flow for this handler.</p>
 </dd></dl>
 
@@ -252,8 +253,8 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="imaprotect.config_flow.IMAProtectOptionsFlowHandler">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">imaprotect.config_flow.</span></span><span class="sig-name descname"><span class="pre">IMAProtectOptionsFlowHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">homeassistant.config_entries.ConfigEntry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/imaprotect/config_flow.html#IMAProtectOptionsFlowHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.config_flow.IMAProtectOptionsFlowHandler" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">homeassistant.config_entries.OptionsFlow</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">imaprotect.config_flow.</span></span><span class="sig-name descname"><span class="pre">IMAProtectOptionsFlowHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ConfigEntry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/imaprotect/config_flow.html#IMAProtectOptionsFlowHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.config_flow.IMAProtectOptionsFlowHandler" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">OptionsFlow</span></code></p>
 <p>Handle IMA Protect Alarm options.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="imaprotect.config_flow.IMAProtectOptionsFlowHandler.async_step_init">
@@ -265,16 +266,16 @@
 
 </section>
 <section id="module-imaprotect.const">
-<span id="imaprotect-const-module"></span><h2>imaprotect.const module<a class="headerlink" href="#module-imaprotect.const" title="Permalink to this headline"></a></h2>
+<span id="imaprotect-const-module"></span><h2>imaprotect.const module<a class="headerlink" href="#module-imaprotect.const" title="Permalink to this heading"></a></h2>
 <p>Constants for the IMA Protect integration.</p>
 </section>
 <section id="module-imaprotect.coordinator">
-<span id="imaprotect-coordinator-module"></span><h2>imaprotect.coordinator module<a class="headerlink" href="#module-imaprotect.coordinator" title="Permalink to this headline"></a></h2>
+<span id="imaprotect-coordinator-module"></span><h2>imaprotect.coordinator module<a class="headerlink" href="#module-imaprotect.coordinator" title="Permalink to this heading"></a></h2>
 <p>DataUpdateCoordinator for the IMA Protect Alarm integration.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="imaprotect.coordinator.IMAProtectDataUpdateCoordinator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">imaprotect.coordinator.</span></span><span class="sig-name descname"><span class="pre">IMAProtectDataUpdateCoordinator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hass</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">homeassistant.core.HomeAssistant</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">homeassistant.config_entries.ConfigEntry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/imaprotect/coordinator.html#IMAProtectDataUpdateCoordinator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.coordinator.IMAProtectDataUpdateCoordinator" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">homeassistant.helpers.update_coordinator.DataUpdateCoordinator</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">imaprotect.coordinator.</span></span><span class="sig-name descname"><span class="pre">IMAProtectDataUpdateCoordinator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hass</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HomeAssistant</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ConfigEntry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/imaprotect/coordinator.html#IMAProtectDataUpdateCoordinator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.coordinator.IMAProtectDataUpdateCoordinator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DataUpdateCoordinator</span></code></p>
 <p>A IMA Protect Alarm Data Update Coordinator.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="imaprotect.coordinator.IMAProtectDataUpdateCoordinator.async_login">
@@ -284,7 +285,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="imaprotect.coordinator.IMAProtectDataUpdateCoordinator.async_logout">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">async_logout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">homeassistant.core.Event</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/imaprotect/coordinator.html#IMAProtectDataUpdateCoordinator.async_logout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.coordinator.IMAProtectDataUpdateCoordinator.async_logout" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">async_logout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Event</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/imaprotect/coordinator.html#IMAProtectDataUpdateCoordinator.async_logout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.coordinator.IMAProtectDataUpdateCoordinator.async_logout" title="Permalink to this definition"></a></dt>
 <dd><p>Logout from IMA Protect Alarm.</p>
 </dd></dl>
 
@@ -298,17 +299,17 @@
 
 </section>
 <section id="module-imaprotect">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-imaprotect" title="Permalink to this headline"></a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-imaprotect" title="Permalink to this heading"></a></h2>
 <p>Support for IMA Protect devices.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="imaprotect.async_setup_entry">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">imaprotect.</span></span><span class="sig-name descname"><span class="pre">async_setup_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hass</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">homeassistant.core.HomeAssistant</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">homeassistant.config_entries.ConfigEntry</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/imaprotect.html#async_setup_entry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.async_setup_entry" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">imaprotect.</span></span><span class="sig-name descname"><span class="pre">async_setup_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hass</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HomeAssistant</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ConfigEntry</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/imaprotect.html#async_setup_entry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.async_setup_entry" title="Permalink to this definition"></a></dt>
 <dd><p>Set up IMA Protect from a config entry.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="imaprotect.async_unload_entry">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">imaprotect.</span></span><span class="sig-name descname"><span class="pre">async_unload_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hass</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">homeassistant.core.HomeAssistant</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">homeassistant.config_entries.ConfigEntry</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/imaprotect.html#async_unload_entry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.async_unload_entry" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">imaprotect.</span></span><span class="sig-name descname"><span class="pre">async_unload_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hass</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HomeAssistant</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ConfigEntry</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/imaprotect.html#async_unload_entry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#imaprotect.async_unload_entry" title="Permalink to this definition"></a></dt>
 <dd><p>Unload IMA Protect config entry.</p>
 </dd></dl>
 
