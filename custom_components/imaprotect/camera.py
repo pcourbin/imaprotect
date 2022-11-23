@@ -92,7 +92,7 @@ class IMAProtectCamera(CoordinatorEntity, Camera):
         if len(mycam[0]["images"]) == 0:
             self._pic = None
         elif self._pic_url != mycam[0]["images"][0]:
-            self._pic_url = mycam[0]["images"][0]
+            self._pic_url = 'https://www.imaprotect.com' + mycam[0]["images"][0]
             self._pic_outdated = True
         super()._handle_coordinator_update()
 
