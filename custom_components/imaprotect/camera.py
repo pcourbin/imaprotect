@@ -90,7 +90,7 @@ class IMAProtectCamera(CoordinatorEntity, Camera):
         mycam = list(filter(lambda c: c["pk"] == self._pk,
                             self.coordinator.data["cameras"]))
         if len(mycam[0]["images"]) == 0:
-            self._pic = None
+            self._pic_url = None
         elif self._pic_url != mycam[0]["images"][0]:
             self._pic_url = 'https://www.imaprotect.com' + mycam[0]["images"][0]
             self._pic_outdated = True
