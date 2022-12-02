@@ -26,10 +26,9 @@ async def async_setup_entry(
 ) -> None:
     """Set up IMA Protect alarm control panel from a config entry."""
     cams : list[IMAProtectCamera] = []
-    for cam in hass.data[DOMAIN][entry.entry_id].data["cameras"]:
+    for cn, cv in hass.data[DOMAIN][entry.entry_id].data["cameras"].items():
         cams.append(IMAProtectCamera(hass = hass,
-                                     unique_id = cam["pk"],
-                                     name = cam["name"],
+                                     name = cn,
                                      coordinator=hass.data[DOMAIN][entry.entry_id]))
     async_add_entities(cams)
 
@@ -43,7 +42,6 @@ class IMAProtectCamera(CoordinatorEntity, Camera):
 
     _state: str | None = None
     _armed_away: bool = False
-    _pk: int
 
     _hass: HomeAssistant
 
@@ -53,7 +51,6 @@ class IMAProtectCamera(CoordinatorEntity, Camera):
 
     def __init__(self,
                  hass: HomeAssistant,
-                 unique_id: int,
                  name: str,
                  coordinator: IMAProtectDataUpdateCoordinator) -> None:
         """Initialize the camera object."""
@@ -63,8 +60,6 @@ class IMAProtectCamera(CoordinatorEntity, Camera):
         self._state = None
         self._armed_away = False
         self._pic = None
-        self._pk = unique_id
-        self._attr_unique_id = unique_id
         self._attr_name = name
 
     @property
@@ -87,9 +82,8 @@ class IMAProtectCamera(CoordinatorEntity, Camera):
     @callback
     def _handle_coordinator_update(self) -> None:
         self._armed_away = (ALARM_STATE_TO_HA.get(self.coordinator.data["alarm"] == 2))
-        mycam = list(filter(lambda c: c["pk"] == self._pk,
-                            self.coordinator.data["cameras"]))
-        if len(mycam[0]["images"]) == 0:
+        mycam = self.coordinator.data["cameras"][self._attr_name]
+        if len(mycam) == 0:
             self._pic_url = None
         elif self._pic_url != mycam[0]["images"][0]:
             self._pic_url = 'https://www.imaprotect.com' + mycam[0]["images"][0]

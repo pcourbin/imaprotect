@@ -61,7 +61,7 @@ class IMAProtectDataUpdateCoordinator(DataUpdateCoordinator):
                 self.imaprotect.__getattribute__, "status"
             )
             cameralist = await self.hass.async_add_executor_job(
-                self.imaprotect._capture_list
+                self.imaprotect.get_images_list
             )
         except IMAProtectConnectError as ex:
             LOGGER.error("Could not read overview, %s", ex)
@@ -80,4 +80,4 @@ class IMAProtectDataUpdateCoordinator(DataUpdateCoordinator):
     @Throttle(timedelta(seconds=60))
     def update_smartcam_imageseries(self) -> None:
         """Update the image series."""
-        self.imageseries = self.imaprotect._capture_list()
+        self.imageseries = self.imaprotect.get_images_list()
