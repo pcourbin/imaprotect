@@ -5,6 +5,9 @@ import homeassistant.helpers.config_validation as cv
 from homeassistant.components.alarm_control_panel import (
     DOMAIN as ALARM_CONTROL_PANEL_DOMAIN,
 )
+from homeassistant.components.camera import (
+    DOMAIN as CAMERA_DOMAIN,
+)
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import EVENT_HOMEASSISTANT_STOP
 from homeassistant.core import HomeAssistant
@@ -15,6 +18,7 @@ from .coordinator import IMAProtectDataUpdateCoordinator
 
 PLATFORMS = [
     ALARM_CONTROL_PANEL_DOMAIN,
+    CAMERA_DOMAIN,
 ]
 
 CONFIG_SCHEMA = cv.deprecated(DOMAIN)

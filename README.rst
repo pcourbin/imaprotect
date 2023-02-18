@@ -68,6 +68,7 @@ It will add a *alarm_control_panel* with the state of your alarm:
 
 Then, **you can define a code** (number or digit) in the configuration of the integration. By default, no code is needed.
 
+If your IMA Protect account lists security cameras, they will be added as *camera* entities. These entities do not currently refresh automatically, and only display the last picture taken.
 
 Credits
 -------
