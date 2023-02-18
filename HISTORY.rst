@@ -2,6 +2,14 @@
 History
 =======
 
+
+1.0.3 (2021-12-31)
+------------------
+
+* Update login procedure according to new IMAProtect "API", thanks to `@Thesola10`_
+* Initial cameras support, thanks to `@Thesola10`_
+
+
 1.0.2 (2021-12-31)
 ------------------
 
@@ -36,3 +44,7 @@ History
 ------------------
 
 * First version
+
+
+
+.. _`@Thesola10`: https://github.com/Thesola10
