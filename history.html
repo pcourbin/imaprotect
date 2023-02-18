@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>History &mdash; imaprotect 1.0.2 documentation</title>
+  <title>History &mdash; imaprotect 1.0.3 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/table.css" type="text/css" />
@@ -34,7 +34,7 @@
             imaprotect
           </a>
               <div class="version">
-                1.0.2
+                1.0.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -52,11 +52,12 @@
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">History</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">1.0.2 (2021-12-31)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">1.0.0 (2021-05-22)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">0.4.0 (2021-05-13)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id4">0.3.0 (2021-05-09)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id5">0.1.0 (2021-04-08)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">1.0.3 (2021-12-31)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1.0.2 (2021-12-31)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">1.0.0 (2021-05-22)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">0.4.0 (2021-05-13)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">0.3.0 (2021-05-09)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">0.1.0 (2021-04-08)</a></li>
 </ul>
 </li>
 </ul>
@@ -88,13 +89,20 @@
   <section id="history">
 <h1>History<a class="headerlink" href="#history" title="Permalink to this heading"></a></h1>
 <section id="id1">
-<h2>1.0.2 (2021-12-31)<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<h2>1.0.3 (2021-12-31)<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Update login procedure according to new IMAProtect “API”, thanks to <a class="reference external" href="https://github.com/Thesola10">&#64;Thesola10</a></p></li>
+<li><p>Initial cameras support, thanks to <a class="reference external" href="https://github.com/Thesola10">&#64;Thesola10</a></p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>1.0.2 (2021-12-31)<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>Update imports to remove references to <cite>HTTP_CODES</cite> from <cite>homeassistant.const</cite></p></li>
 </ul>
 </section>
-<section id="id2">
-<h2>1.0.0 (2021-05-22)<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<section id="id3">
+<h2>1.0.0 (2021-05-22)<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>Full rewrite using a alarm_control_panel based on work for <a class="reference external" href="https://github.com/home-assistant/core/tree/dev/homeassistant/components/verisure">Verisure Alarm</a> by <a class="reference external" href="https://github.com/frenck">&#64;frenck</a>.</p></li>
 <li><p>Able to get the status and change the status of the alarm using a alarm_control_panel</p></li>
@@ -102,23 +110,23 @@
 <li><p>Remove the configuration using YAML, only possible using the UI.</p></li>
 </ul>
 </section>
-<section id="id3">
-<h2>0.4.0 (2021-05-13)<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<section id="id4">
+<h2>0.4.0 (2021-05-13)<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>Full rewrite using platform/devices</p></li>
 <li><p>Allow adding devices/entities without knowing the API: counter, digitalinput, enocean, post, relay, supplierindex, toroid, virtualoutput, x4fp, xthl</p></li>
 <li><p>Allow selecting different components (e.g. for <cite>enocean</cite>, you can select <cite>sensor</cite>, <cite>switch</cite> or <cite>light</cite>)</p></li>
 </ul>
 </section>
-<section id="id4">
-<h2>0.3.0 (2021-05-09)<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<section id="id5">
+<h2>0.3.0 (2021-05-09)<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>Update pyimaprotect, using new IMAProtect “API”</p></li>
 <li><p>Older versions are not working anymore</p></li>
 </ul>
 </section>
-<section id="id5">
-<h2>0.1.0 (2021-04-08)<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<section id="id6">
+<h2>0.1.0 (2021-04-08)<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>First version</p></li>
 </ul>
