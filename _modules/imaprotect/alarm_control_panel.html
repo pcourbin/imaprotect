@@ -11,11 +11,10 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -26,14 +25,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> imaprotect
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            imaprotect
           </a>
               <div class="version">
                 1.0.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -62,10 +65,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-          <li><a href="../imaprotect.html">imaprotect</a> &raquo;</li>
-      <li>imaprotect.alarm_control_panel</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../imaprotect.html">imaprotect</a></li>
+      <li class="breadcrumb-item active">imaprotect.alarm_control_panel</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -76,29 +79,29 @@
              
   <h1>Source code for imaprotect.alarm_control_panel</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Support for IMA Protect alarm control panels.&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">annotations</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="k">import</span> <span class="n">Iterable</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Callable</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
 
-<span class="kn">from</span> <span class="nn">homeassistant.components.alarm_control_panel</span> <span class="k">import</span> <span class="n">AlarmControlPanelEntity</span>
-<span class="kn">from</span> <span class="nn">homeassistant.components.alarm_control_panel</span> <span class="k">import</span> <span class="n">FORMAT_NUMBER</span>
-<span class="kn">from</span> <span class="nn">homeassistant.components.alarm_control_panel</span> <span class="k">import</span> <span class="n">FORMAT_TEXT</span>
-<span class="kn">from</span> <span class="nn">homeassistant.components.alarm_control_panel.const</span> <span class="k">import</span> <span class="n">SUPPORT_ALARM_ARM_AWAY</span>
-<span class="kn">from</span> <span class="nn">homeassistant.components.alarm_control_panel.const</span> <span class="k">import</span> <span class="n">SUPPORT_ALARM_ARM_HOME</span>
-<span class="kn">from</span> <span class="nn">homeassistant.config_entries</span> <span class="k">import</span> <span class="n">ConfigEntry</span>
-<span class="kn">from</span> <span class="nn">homeassistant.const</span> <span class="k">import</span> <span class="n">CONF_NAME</span>
-<span class="kn">from</span> <span class="nn">homeassistant.core</span> <span class="k">import</span> <span class="n">callback</span>
-<span class="kn">from</span> <span class="nn">homeassistant.core</span> <span class="k">import</span> <span class="n">HomeAssistant</span>
-<span class="kn">from</span> <span class="nn">homeassistant.helpers.entity</span> <span class="k">import</span> <span class="n">Entity</span>
-<span class="kn">from</span> <span class="nn">homeassistant.helpers.update_coordinator</span> <span class="k">import</span> <span class="n">CoordinatorEntity</span>
+<span class="kn">from</span> <span class="nn">homeassistant.components.alarm_control_panel</span> <span class="kn">import</span> <span class="n">AlarmControlPanelEntity</span>
+<span class="kn">from</span> <span class="nn">homeassistant.components.alarm_control_panel</span> <span class="kn">import</span> <span class="n">FORMAT_NUMBER</span>
+<span class="kn">from</span> <span class="nn">homeassistant.components.alarm_control_panel</span> <span class="kn">import</span> <span class="n">FORMAT_TEXT</span>
+<span class="kn">from</span> <span class="nn">homeassistant.components.alarm_control_panel.const</span> <span class="kn">import</span> <span class="n">SUPPORT_ALARM_ARM_AWAY</span>
+<span class="kn">from</span> <span class="nn">homeassistant.components.alarm_control_panel.const</span> <span class="kn">import</span> <span class="n">SUPPORT_ALARM_ARM_HOME</span>
+<span class="kn">from</span> <span class="nn">homeassistant.config_entries</span> <span class="kn">import</span> <span class="n">ConfigEntry</span>
+<span class="kn">from</span> <span class="nn">homeassistant.const</span> <span class="kn">import</span> <span class="n">CONF_NAME</span>
+<span class="kn">from</span> <span class="nn">homeassistant.core</span> <span class="kn">import</span> <span class="n">callback</span>
+<span class="kn">from</span> <span class="nn">homeassistant.core</span> <span class="kn">import</span> <span class="n">HomeAssistant</span>
+<span class="kn">from</span> <span class="nn">homeassistant.helpers.entity</span> <span class="kn">import</span> <span class="n">Entity</span>
+<span class="kn">from</span> <span class="nn">homeassistant.helpers.update_coordinator</span> <span class="kn">import</span> <span class="n">CoordinatorEntity</span>
 
-<span class="kn">from</span> <span class="nn">.const</span> <span class="k">import</span> <span class="n">ALARM_STATE_TO_HA</span>
-<span class="kn">from</span> <span class="nn">.const</span> <span class="k">import</span> <span class="n">CONF_ALARM_CODE</span>
-<span class="kn">from</span> <span class="nn">.const</span> <span class="k">import</span> <span class="n">DOMAIN</span>
-<span class="kn">from</span> <span class="nn">.const</span> <span class="k">import</span> <span class="n">LOGGER</span>
-<span class="kn">from</span> <span class="nn">.coordinator</span> <span class="k">import</span> <span class="n">IMAProtectDataUpdateCoordinator</span>
+<span class="kn">from</span> <span class="nn">.const</span> <span class="kn">import</span> <span class="n">ALARM_STATE_TO_HA</span>
+<span class="kn">from</span> <span class="nn">.const</span> <span class="kn">import</span> <span class="n">CONF_ALARM_CODE</span>
+<span class="kn">from</span> <span class="nn">.const</span> <span class="kn">import</span> <span class="n">DOMAIN</span>
+<span class="kn">from</span> <span class="nn">.const</span> <span class="kn">import</span> <span class="n">LOGGER</span>
+<span class="kn">from</span> <span class="nn">.coordinator</span> <span class="kn">import</span> <span class="n">IMAProtectDataUpdateCoordinator</span>
 
 
 <div class="viewcode-block" id="async_setup_entry"><a class="viewcode-back" href="../../imaprotect.html#imaprotect.alarm_control_panel.async_setup_entry">[docs]</a><span class="k">async</span> <span class="k">def</span> <span class="nf">async_setup_entry</span><span class="p">(</span>
@@ -106,20 +109,20 @@
     <span class="n">entry</span><span class="p">:</span> <span class="n">ConfigEntry</span><span class="p">,</span>
     <span class="n">async_add_entities</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Entity</span><span class="p">]],</span> <span class="kc">None</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Set up IMA Protect alarm control panel from a config entry.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set up IMA Protect alarm control panel from a config entry.&quot;&quot;&quot;</span>
     <span class="n">async_add_entities</span><span class="p">([</span><span class="n">IMAProtectAlarm</span><span class="p">(</span><span class="n">coordinator</span><span class="o">=</span><span class="n">hass</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">DOMAIN</span><span class="p">][</span><span class="n">entry</span><span class="o">.</span><span class="n">entry_id</span><span class="p">])])</span></div>
 
 
 <div class="viewcode-block" id="IMAProtectAlarm"><a class="viewcode-back" href="../../imaprotect.html#imaprotect.alarm_control_panel.IMAProtectAlarm">[docs]</a><span class="k">class</span> <span class="nc">IMAProtectAlarm</span><span class="p">(</span><span class="n">CoordinatorEntity</span><span class="p">,</span> <span class="n">AlarmControlPanelEntity</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Representation of a IMAProtect alarm status.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Representation of a IMAProtect alarm status.&quot;&quot;&quot;</span>
 
     <span class="n">coordinator</span><span class="p">:</span> <span class="n">IMAProtectDataUpdateCoordinator</span>
 
     <span class="n">_changed_by</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">_state</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coordinator</span><span class="p">:</span> <span class="n">IMAProtectDataUpdateCoordinator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Initialize the IMA Protect Alarm Control Panel.&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coordinator</span><span class="p">:</span> <span class="n">IMAProtectDataUpdateCoordinator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the IMA Protect Alarm Control Panel.&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">coordinator</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_changed_by</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="kc">None</span>
@@ -130,17 +133,17 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return the name of the entity.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the name of the entity.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinator</span><span class="o">.</span><span class="n">entry</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">CONF_NAME</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">unique_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return the unique ID for this entity.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the unique ID for this entity.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinator</span><span class="o">.</span><span class="n">entry</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">CONF_NAME</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">device_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return device information about this entity.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return device information about this entity.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;IMA Protect Alarm&quot;</span><span class="p">,</span>
             <span class="s2">&quot;manufacturer&quot;</span><span class="p">:</span> <span class="s2">&quot;IMA International&quot;</span><span class="p">,</span>
@@ -150,12 +153,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return the state of the entity.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the state of the entity.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">supported_features</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return the list of supported features.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the list of supported features.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">SUPPORT_ALARM_ARM_HOME</span> <span class="o">|</span> <span class="n">SUPPORT_ALARM_ARM_AWAY</span>
 
     <span class="nd">@property</span>
@@ -169,7 +172,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">changed_by</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return the last change triggered by.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the last change triggered by.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_changed_by</span>
 
     <span class="k">def</span> <span class="nf">_validate_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code_test</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -186,7 +189,7 @@
         <span class="k">return</span> <span class="n">check</span>
 
     <span class="k">async</span> <span class="k">def</span> <span class="nf">_async_set_arm_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Send set arm state command.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Send set arm state command.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_code</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
             <span class="k">return</span>
 
@@ -197,20 +200,20 @@
         <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinator</span><span class="o">.</span><span class="n">async_refresh</span><span class="p">()</span>
 
 <div class="viewcode-block" id="IMAProtectAlarm.async_alarm_disarm"><a class="viewcode-back" href="../../imaprotect.html#imaprotect.alarm_control_panel.IMAProtectAlarm.async_alarm_disarm">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">async_alarm_disarm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Send disarm command.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Send disarm command.&quot;&quot;&quot;</span>
         <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_async_set_arm_state</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">code</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="IMAProtectAlarm.async_alarm_arm_home"><a class="viewcode-back" href="../../imaprotect.html#imaprotect.alarm_control_panel.IMAProtectAlarm.async_alarm_arm_home">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">async_alarm_arm_home</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Send arm home command.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Send arm home command.&quot;&quot;&quot;</span>
         <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_async_set_arm_state</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">code</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="IMAProtectAlarm.async_alarm_arm_away"><a class="viewcode-back" href="../../imaprotect.html#imaprotect.alarm_control_panel.IMAProtectAlarm.async_alarm_arm_away">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">async_alarm_arm_away</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Send arm away command.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Send arm away command.&quot;&quot;&quot;</span>
         <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_async_set_arm_state</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">code</span><span class="p">)</span></div>
 
     <span class="nd">@callback</span>
     <span class="k">def</span> <span class="nf">_handle_coordinator_update</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Handle updated data from the coordinator.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle updated data from the coordinator.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="n">ALARM_STATE_TO_HA</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coordinator</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;alarm&quot;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_changed_by</span> <span class="o">=</span> <span class="p">(</span>
             <span class="s2">&quot;Not Implemented&quot;</span>  <span class="c1"># TODO: self.coordinator.data[&quot;alarm&quot;].get(&quot;name&quot;)</span>
@@ -218,7 +221,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_handle_coordinator_update</span><span class="p">()</span>
 
 <div class="viewcode-block" id="IMAProtectAlarm.async_added_to_hass"><a class="viewcode-back" href="../../imaprotect.html#imaprotect.alarm_control_panel.IMAProtectAlarm.async_added_to_hass">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">async_added_to_hass</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;When entity is added to hass.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;When entity is added to hass.&quot;&quot;&quot;</span>
         <span class="k">await</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">async_added_to_hass</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_handle_coordinator_update</span><span class="p">()</span></div></div>
 </pre></div>
