@@ -2,6 +2,10 @@
 History
 =======
 
+1.0.4 (2023-05-16)
+------------------
+
+* Correction of depreciated code (since 2023.5) by a PR of `@fslef`_, on a proposition of `@bcze91`_.
 
 1.0.3 (2021-12-31)
 ------------------
@@ -14,7 +18,7 @@ History
 ------------------
 
 * Update imports to remove references to `HTTP_CODES` from `homeassistant.const`
-  
+
 1.0.0 (2021-05-22)
 ------------------
 
@@ -48,3 +52,5 @@ History
 
 
 .. _`@Thesola10`: https://github.com/Thesola10
+.. _`@bcze91`: https://github.com/bcze91
+.. _`@fslef`: https://github.com/fslef
