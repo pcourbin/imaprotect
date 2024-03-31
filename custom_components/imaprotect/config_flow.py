@@ -1,8 +1,6 @@
 """Config flow for IMA Protect Alarm integration."""
 from __future__ import annotations
 
-from pyimaprotect import IMAProtect
-from pyimaprotect import IMAProtectConnectError
 from typing import Any
 
 import voluptuous as vol
@@ -14,6 +12,8 @@ from homeassistant.const import CONF_NAME
 from homeassistant.const import CONF_PASSWORD
 from homeassistant.core import callback
 from homeassistant.data_entry_flow import FlowResult
+from pyimaprotect import IMAProtect
+from pyimaprotect import IMAProtectConnectError
 
 from .const import CONF_ALARM_CODE
 from .const import DOMAIN

@@ -2,6 +2,12 @@
 History
 =======
 
+1.0.5 (2024-03-31)
+------------------
+
+* Update RE_ALARM_TOKEN since IMA Protect login page changed again..., thanks to `@Chrilk`_
+
+
 1.0.4 (2023-05-16)
 ------------------
 
@@ -54,3 +60,4 @@ History
 .. _`@Thesola10`: https://github.com/Thesola10
 .. _`@bcze91`: https://github.com/bcze91
 .. _`@fslef`: https://github.com/fslef
+.. _`@Chrilk`: https://github.com/Chrilk
