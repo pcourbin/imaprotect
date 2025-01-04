@@ -4,12 +4,10 @@ from __future__ import annotations
 import re
 from collections.abc import Iterable
 from typing import Callable
-
-from homeassistant.components.alarm_control_panel import AlarmControlPanelEntity
-from homeassistant.components.alarm_control_panel import FORMAT_NUMBER
-from homeassistant.components.alarm_control_panel import FORMAT_TEXT
-from homeassistant.components.alarm_control_panel.const import SUPPORT_ALARM_ARM_AWAY
-from homeassistant.components.alarm_control_panel.const import SUPPORT_ALARM_ARM_HOME
+ 
+from homeassistant.components.alarm_control_panel import AlarmControlPanelEntity 
+from homeassistant.components.alarm_control_panel import CodeFormat
+from homeassistant.components.alarm_control_panel import AlarmControlPanelEntityFeature
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_NAME
 from homeassistant.core import callback
@@ -79,7 +77,7 @@ class IMAProtectAlarm(CoordinatorEntity, AlarmControlPanelEntity):
     @property
     def supported_features(self) -> int:
         """Return the list of supported features."""
-        return SUPPORT_ALARM_ARM_HOME | SUPPORT_ALARM_ARM_AWAY
+        return AlarmControlPanelEntityFeature.ARM_HOME | AlarmControlPanelEntityFeature.ARM_AWAY
 
     @property
     def code_format(self):
@@ -87,8 +85,8 @@ class IMAProtectAlarm(CoordinatorEntity, AlarmControlPanelEntity):
         if code is None or code == "":
             return None
         if isinstance(code, str) and re.search("^\\d+$", code):
-            return FORMAT_NUMBER
-        return FORMAT_TEXT
+            return CodeFormat.NUMBER
+        return CodeFormat.TEXT
 
     @property
     def changed_by(self) -> str | None:
