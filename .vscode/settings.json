@@ -9,5 +9,9 @@
   },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
-  "esbonio.sphinx.confDir": ""
+  "esbonio.server.enabled": true,
+  "esbonio.sphinx.confDir": "${workspaceFolder}/docs",
+  "python.testing.pytestArgs": [],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true
 }
