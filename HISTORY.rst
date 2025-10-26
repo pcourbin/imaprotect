@@ -2,6 +2,11 @@
 History
 =======
 
+1.0.8 (2025-10-26)
+------------------
+
+* Update login procedure since IMA Protect login page changed again..., thanks to `@falconslag`_
+
 1.0.5 (2024-03-31)
 ------------------
 
@@ -61,3 +66,4 @@ History
 .. _`@bcze91`: https://github.com/bcze91
 .. _`@fslef`: https://github.com/fslef
 .. _`@Chrilk`: https://github.com/Chrilk
+.. _`@falconslag`: https://github.com/falconslag

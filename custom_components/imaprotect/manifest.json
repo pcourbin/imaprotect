@@ -6,7 +6,7 @@
   "codeowners": ["@pcourbin"],
   "config_flow": true,
   "requirements": [
-    "pyimaprotect==3.1.6"
+    "pyimaprotect==3.2.0"
   ],
   "dependencies": [],
   "version": "1.0.7",
