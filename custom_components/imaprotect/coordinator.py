@@ -14,6 +14,8 @@ from homeassistant.util import Throttle
 from pyimaprotect import IMAProtect
 from pyimaprotect import IMAProtectConnectError
 
+from .const import CONF_IMA_CONTRACT_NUM
+from .const import CONF_SELENIUM_WEBDRIVER
 from .const import DEFAULT_SCAN_INTERVAL
 from .const import DOMAIN
 from .const import LOGGER
@@ -28,7 +30,7 @@ class IMAProtectDataUpdateCoordinator(DataUpdateCoordinator):
         self.entry = entry
 
         self.imaprotect = IMAProtect(
-            username=entry.data[CONF_EMAIL], password=entry.data[CONF_PASSWORD]
+            username=entry.data[CONF_EMAIL], password=entry.data[CONF_PASSWORD], remote_webdriver=entry.data[CONF_SELENIUM_WEBDRIVER], contract_number=entry.data[CONF_IMA_CONTRACT_NUM]
         )
 
         super().__init__(

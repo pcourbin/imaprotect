@@ -2,10 +2,11 @@
 History
 =======
 
-1.0.8 (2025-10-26)
+1.0.8 (2025-10-28)
 ------------------
 
 * Update login procedure since IMA Protect login page changed again..., thanks to `@falconslag`_
+* Note: You must now deploy a Docker container that provides a Firefox Selenium webserver for the login automation.
 
 1.0.5 (2024-03-31)
 ------------------
