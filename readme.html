@@ -47,6 +47,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">IMA Protect Alarm component for Home Assistant</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#documentation">Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#credits">Credits</a></li>
 </ul>
@@ -108,6 +109,29 @@
 <section id="documentation">
 <h2><a class="reference external" href="https://pcourbin.github.io/imaprotect">Documentation</a><a class="headerlink" href="#documentation" title="Link to this heading"></a></h2>
 <p>See <a class="reference external" href="https://pcourbin.github.io/imaprotect">https://pcourbin.github.io/imaprotect</a></p>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
+<p>This integration requires a running Selenium server to retrieve images. Deploy the Selenium standalone Firefox Docker container below, and when creating the IMAProtect client set the remote_webdriver parameter to the correct WebDriver URL reachable from your Home Assistant instance (for example: <code class="docutils literal notranslate"><span class="pre">http://localhost:4444</span></code> or <code class="docutils literal notranslate"><span class="pre">http://selenium_firefox:4444</span></code>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure the WebDriver URL you provide in <code class="docutils literal notranslate"><span class="pre">remote_webdriver</span></code> is accessible from the environment where Home Assistant runs.</p>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">firefox</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">selenium_firefox</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">selenium/standalone-firefox:143.0-20251020</span>
+<span class="w">    </span><span class="nt">shm_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2g</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;4444:4444&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;7900:7900&quot;</span>
+</pre></div>
+</div>
+<p>Usage:
+# 1. Save this as docker-compose.yml in the project folder.
+# 2. Start with: docker-compose up -d
+# 3. When creating IMAProtect, provide the WebDriver URL, for example:
+#    remote_webdriver=’<a class="reference external" href="http://localhost:4444">http://localhost:4444</a>’  (adjust host/port to match your deployment)</p>
 </section>
 <section id="configuration">
 <h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
