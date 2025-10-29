@@ -11,6 +11,8 @@ DOMAIN = "imaprotect"
 LOGGER = logging.getLogger(__package__)
 
 CONF_ALARM_CODE = "alarm_code"
+CONF_SELENIUM_WEBDRIVER = "selenium_webdriver"
+CONF_IMA_CONTRACT_NUM = "ima_contract_num"
 
 DEFAULT_SCAN_INTERVAL = timedelta(minutes=1)
 

@@ -42,6 +42,29 @@
 ----------------
 See https://pcourbin.github.io/imaprotect
 
+Installation
+------------
+This integration requires a running Selenium server to retrieve images. Deploy the Selenium standalone Firefox Docker container below, and when creating the IMAProtect client set the remote_webdriver parameter to the correct WebDriver URL reachable from your Home Assistant instance (for example: ``http://localhost:4444`` or ``http://selenium_firefox:4444``).
+
+.. note:: Make sure the WebDriver URL you provide in ``remote_webdriver`` is accessible from the environment where Home Assistant runs.
+
+.. code-block:: yaml
+
+  services:
+    firefox:
+      container_name: selenium_firefox
+      image: selenium/standalone-firefox:143.0-20251020
+      shm_size: 2g
+      ports:
+        - "4444:4444"
+        - "7900:7900"
+
+Usage:
+# 1. Save this as docker-compose.yml in the project folder.
+# 2. Start with: docker-compose up -d
+# 3. When creating IMAProtect, provide the WebDriver URL, for example:
+#    remote_webdriver='http://localhost:4444'  (adjust host/port to match your deployment)
+
 Configuration
 -------------
 
