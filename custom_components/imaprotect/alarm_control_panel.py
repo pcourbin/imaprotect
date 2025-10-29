@@ -4,10 +4,11 @@ from __future__ import annotations
 import re
 from collections.abc import Iterable
 from typing import Callable
- 
-from homeassistant.components.alarm_control_panel import AlarmControlPanelEntity 
+
+from homeassistant.components.alarm_control_panel import AlarmControlPanelEntity
 from homeassistant.components.alarm_control_panel import CodeFormat
 from homeassistant.components.alarm_control_panel import AlarmControlPanelEntityFeature
+from homeassistant.components.alarm_control_panel import AlarmControlPanelState
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_NAME
 from homeassistant.core import callback
@@ -37,13 +38,11 @@ class IMAProtectAlarm(CoordinatorEntity, AlarmControlPanelEntity):
     coordinator: IMAProtectDataUpdateCoordinator
 
     _changed_by: str | None = None
-    _state: str | None = None
-
-    def __init__(self, coordinator: IMAProtectDataUpdateCoordinator) -> None:
-        """Initialize the IMA Protect Alarm Control Panel."""
-        super().__init__(coordinator)
-        self._changed_by = None
-        self._state = None
+    _attr_code_format = CodeFormat.NUMBER
+    _attr_supported_features = (
+        AlarmControlPanelEntityFeature.ARM_HOME
+        | AlarmControlPanelEntityFeature.ARM_AWAY
+    )
 
     @property
     def code(self):
@@ -70,23 +69,9 @@ class IMAProtectAlarm(CoordinatorEntity, AlarmControlPanelEntity):
         }
 
     @property
-    def state(self) -> str | None:
-        """Return the state of the entity."""
-        return self._state
-
-    @property
     def supported_features(self) -> int:
         """Return the list of supported features."""
         return AlarmControlPanelEntityFeature.ARM_HOME | AlarmControlPanelEntityFeature.ARM_AWAY
-
-    @property
-    def code_format(self):
-        code = self.code
-        if code is None or code == "":
-            return None
-        if isinstance(code, str) and re.search("^\\d+$", code):
-            return CodeFormat.NUMBER
-        return CodeFormat.TEXT
 
     @property
     def changed_by(self) -> str | None:
@@ -119,6 +104,8 @@ class IMAProtectAlarm(CoordinatorEntity, AlarmControlPanelEntity):
 
     async def async_alarm_disarm(self, code=None) -> None:
         """Send disarm command."""
+        self._attr_alarm_state = AlarmControlPanelState.DISARMING
+        self.async_write_ha_state()
         await self._async_set_arm_state(0, code)
 
     async def async_alarm_arm_home(self, code=None) -> None:
@@ -132,7 +119,7 @@ class IMAProtectAlarm(CoordinatorEntity, AlarmControlPanelEntity):
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        self._state = ALARM_STATE_TO_HA.get(self.coordinator.data["alarm"])
+        self._attr_alarm_state = ALARM_STATE_TO_HA.get(self.coordinator.data["alarm"])
         self._changed_by = (
             "Not Implemented"  # TODO: self.coordinator.data["alarm"].get("name")
         )

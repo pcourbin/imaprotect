@@ -10,6 +10,7 @@ from homeassistant.components.camera import (
 )
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import EVENT_HOMEASSISTANT_STOP
+from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryAuthFailed
 
@@ -17,8 +18,8 @@ from .const import DOMAIN
 from .coordinator import IMAProtectDataUpdateCoordinator
 
 PLATFORMS = [
-    ALARM_CONTROL_PANEL_DOMAIN,
-    CAMERA_DOMAIN,
+    Platform.ALARM_CONTROL_PANEL,
+    Platform.CAMERA,
 ]
 
 CONFIG_SCHEMA = cv.deprecated(DOMAIN)
@@ -41,11 +42,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     hass.data[DOMAIN][entry.entry_id] = coordinator
 
     # Set up all platforms for this device/entry.
-    for platform in PLATFORMS:
-        hass.async_create_task(
-            hass.config_entries.async_forward_entry_setup(entry, platform)
-        )
-
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
 
     return True

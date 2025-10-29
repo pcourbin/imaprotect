@@ -11,7 +11,13 @@ from homeassistant.const import CONF_EMAIL
 from homeassistant.const import CONF_NAME
 from homeassistant.const import CONF_PASSWORD
 from homeassistant.core import callback
-from homeassistant.data_entry_flow import FlowResult
+from homeassistant.config_entries import (
+    ConfigEntry,
+    ConfigFlow,
+    ConfigFlowResult,
+    OptionsFlow,
+)
+
 from pyimaprotect import IMAProtect
 from pyimaprotect import IMAProtectConnectError
 
@@ -32,7 +38,8 @@ class IMAProtectConfigFlowHandler(ConfigFlow, domain=DOMAIN):
     password: str
     name: str
     selenium_webdriver: str
-    ima_contract_num: str
+    ima_contract_num: str | None
+    imaprotect: IMAProtect
 
     @staticmethod
     @callback
@@ -44,16 +51,19 @@ class IMAProtectConfigFlowHandler(ConfigFlow, domain=DOMAIN):
 
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Handle the initial step."""
         errors: dict[str, str] = {}
 
         if user_input is not None:
-            imaprotect = IMAProtect(
-                username=user_input[CONF_EMAIL], password=user_input[CONF_PASSWORD], remote_webdriver=user_input[CONF_SELENIUM_WEBDRIVER], contract_number=user_input[CONF_IMA_CONTRACT_NUM]
+            local_ima_contract_num = user_input[CONF_IMA_CONTRACT_NUM]
+            if (local_ima_contract_num == ""):
+                local_ima_contract_num = None
+            self.imaprotect = IMAProtect(
+                username=user_input[CONF_EMAIL], password=user_input[CONF_PASSWORD], remote_webdriver=user_input[CONF_SELENIUM_WEBDRIVER], contract_number=local_ima_contract_num
             )
             try:
-                await self.hass.async_add_executor_job(imaprotect.login)
+                await self.hass.async_add_executor_job(self.imaprotect.login)
             except IMAProtectConnectError as ex:
                 LOGGER.debug("Could not log in to IMA Protect Alarm, %s", ex)
                 errors["base"] = "invalid_auth"
@@ -66,6 +76,8 @@ class IMAProtectConfigFlowHandler(ConfigFlow, domain=DOMAIN):
                 self.name = user_input[CONF_NAME]
                 self.selenium_webdriver = user_input[CONF_SELENIUM_WEBDRIVER]
                 self.ima_contract_num = user_input[CONF_IMA_CONTRACT_NUM]
+                if (self.ima_contract_num == ""):
+                    self.ima_contract_num = None
 
                 return await self.async_step_installation()
 
@@ -77,7 +89,7 @@ class IMAProtectConfigFlowHandler(ConfigFlow, domain=DOMAIN):
                     vol.Required(CONF_EMAIL): str,
                     vol.Required(CONF_PASSWORD): str,
                     vol.Required(CONF_SELENIUM_WEBDRIVER, default="http://localhost:4444"): str,
-                    vol.Optional(CONF_IMA_CONTRACT_NUM, default=None): str,
+                    vol.Optional(CONF_IMA_CONTRACT_NUM, default=""): str,
                 }
             ),
             errors=errors,
@@ -85,7 +97,7 @@ class IMAProtectConfigFlowHandler(ConfigFlow, domain=DOMAIN):
 
     async def async_step_installation(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Select IMA Protect Alarm installation to add."""
 
         await self.async_set_unique_id(self.name)
@@ -102,23 +114,26 @@ class IMAProtectConfigFlowHandler(ConfigFlow, domain=DOMAIN):
             },
         )
 
-    async def async_step_reauth(self, data: dict[str, Any]) -> FlowResult:
+    async def async_step_reauth(self, data: dict[str, Any]) -> ConfigFlowResult:
         """Handle initiation of re-authentication with IMA Protect Alarm."""
         self.entry = self.hass.config_entries.async_get_entry(self.context["entry_id"])
         return await self.async_step_reauth_confirm()
 
     async def async_step_reauth_confirm(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Handle re-authentication with IMA Protect Alarm."""
         errors: dict[str, str] = {}
 
         if user_input is not None:
-            imaprotect = IMAProtect(
-                username=user_input[CONF_EMAIL], password=user_input[CONF_PASSWORD], remote_webdriver=user_input[CONF_SELENIUM_WEBDRIVER], contract_number=user_input[CONF_IMA_CONTRACT_NUM]
+            local_ima_contract_num = user_input[CONF_IMA_CONTRACT_NUM]
+            if (local_ima_contract_num == ""):
+                local_ima_contract_num = None
+            self.imaprotect = IMAProtect(
+                username=user_input[CONF_EMAIL], password=user_input[CONF_PASSWORD], remote_webdriver=user_input[CONF_SELENIUM_WEBDRIVER], contract_number=local_ima_contract_num
             )
             try:
-                await self.hass.async_add_executor_job(imaprotect.login)
+                await self.hass.async_add_executor_job(self.imaprotect.login)
             except IMAProtectConnectError as ex:
                 LOGGER.debug("Could not log in to IMA Protect Alarm, %s", ex)
                 errors["base"] = "invalid_auth"
@@ -134,7 +149,7 @@ class IMAProtectConfigFlowHandler(ConfigFlow, domain=DOMAIN):
                         CONF_EMAIL: user_input[CONF_EMAIL],
                         CONF_PASSWORD: user_input[CONF_PASSWORD],
                         CONF_SELENIUM_WEBDRIVER: user_input[CONF_SELENIUM_WEBDRIVER],
-                        CONF_IMA_CONTRACT_NUM: user_input[CONF_IMA_CONTRACT_NUM],
+                        CONF_IMA_CONTRACT_NUM: local_ima_contract_num,
                     },
                 )
                 self.hass.async_create_task(
@@ -149,7 +164,7 @@ class IMAProtectConfigFlowHandler(ConfigFlow, domain=DOMAIN):
                     vol.Required(CONF_EMAIL, default=self.entry.data[CONF_EMAIL]): str,
                     vol.Required(CONF_PASSWORD): str,
                     vol.Required(CONF_SELENIUM_WEBDRIVER, default=self.entry.data[CONF_SELENIUM_WEBDRIVER]): str,
-                    vol.Required(CONF_IMA_CONTRACT_NUM, default=self.entry.data[CONF_IMA_CONTRACT_NUM]): str,
+                    vol.Optional(CONF_IMA_CONTRACT_NUM, default=self.entry.data[CONF_IMA_CONTRACT_NUM]): str | None,
                 }
             ),
             errors=errors,
@@ -165,7 +180,7 @@ class IMAProtectOptionsFlowHandler(OptionsFlow):
 
     async def async_step_init(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Manage IMA Protect Alarm options."""
         errors = {}
 

@@ -1,0 +1,18 @@
+services:
+  homeassistant:
+    container_name: ha_imaprotect
+    image: mcr.microsoft.com/devcontainers/python:3.13
+    ports:
+      - "8123:8123"
+    volumes:
+      # Mount the root folder that contains .git
+      - .:/workspace
+    command: sleep infinity
+
+  selenium_firefox:
+    container_name: selenium_firefox
+    image: selenium/standalone-firefox:130.0-20251025
+    shm_size: '2gb'
+    ports:
+      - "4444:4444"
+      - "7900:7900"

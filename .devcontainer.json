@@ -1,10 +1,12 @@
 {
   "name": "IMA Protect Alarm integration development - ludeeus/integration_blueprint",
-  "image": "mcr.microsoft.com/devcontainers/python:3.13",
-  "postCreateCommand": "scripts/setup",
-  "forwardPorts": [
-    8123
+  "dockerComposeFile": [
+    "./docker-compose.yml"
   ],
+  "service": "homeassistant",
+  "shutdownAction": "none",
+  "workspaceFolder": "/workspace",
+  "postCreateCommand": "scripts/setup",
   "portsAttributes": {
     "8123": {
       "label": "Home Assistant",

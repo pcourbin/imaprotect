@@ -2,9 +2,7 @@
 import logging
 from datetime import timedelta
 
-from homeassistant.const import STATE_ALARM_ARMED_AWAY
-from homeassistant.const import STATE_ALARM_ARMED_HOME
-from homeassistant.const import STATE_ALARM_DISARMED
+from homeassistant.components.alarm_control_panel import AlarmControlPanelState
 
 DOMAIN = "imaprotect"
 
@@ -17,7 +15,7 @@ CONF_IMA_CONTRACT_NUM = "ima_contract_num"
 DEFAULT_SCAN_INTERVAL = timedelta(minutes=1)
 
 ALARM_STATE_TO_HA = {
-    0: STATE_ALARM_DISARMED,
-    1: STATE_ALARM_ARMED_HOME,
-    2: STATE_ALARM_ARMED_AWAY,
+    0: AlarmControlPanelState.DISARMED,
+    1: AlarmControlPanelState.ARMED_HOME,
+    2: AlarmControlPanelState.ARMED_AWAY,
 }
