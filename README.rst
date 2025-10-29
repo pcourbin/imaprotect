@@ -53,7 +53,7 @@ This integration requires a running Selenium server to retrieve images. Deploy t
   services:
     firefox:
       container_name: selenium_firefox
-      image: selenium/standalone-firefox:143.0-20251020
+      image: selenium/standalone-firefox:130.0-20251025
       shm_size: 2g
       ports:
         - "4444:4444"
